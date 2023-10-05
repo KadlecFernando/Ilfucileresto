@@ -1,23 +1,27 @@
 package ilfucileresto.Entidades;
 // El Sebas: El rockanroll no morirá jamás ♡♡♡♡♡♡♡ 
+
 public class Producto {
 
     private int idProducto;
-    private String descripcion;
+    private String nombreProducto;
     private double precioUnitario;
+    private int stock;
     private boolean estado;
 
-    public Producto(int idProducto, String descripcion, double precioUnitario) {
+    public Producto(int idProducto, String nombreProducto, double precioUnitario, int stock, boolean estado) {
         this.idProducto = idProducto;
-        this.descripcion = descripcion;
+        this.nombreProducto = nombreProducto;
         this.precioUnitario = precioUnitario;
-        this.estado = true;
+        this.stock = stock;
+        this.estado = estado;
     }
 
-    public Producto(String descripcion, double precioUnitario) {
-        this.descripcion = descripcion;
+    public Producto(String nombreProducto, double precioUnitario, int stock, boolean estado) {
+        this.nombreProducto = nombreProducto;
         this.precioUnitario = precioUnitario;
-        this.estado = true;
+        this.stock = stock;
+        this.estado = estado;
     }
 
     public Producto() {
@@ -31,12 +35,12 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
     public double getPrecioUnitario() {
@@ -45,6 +49,14 @@ public class Producto {
 
     public void setPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public boolean isEstado() {
@@ -58,16 +70,12 @@ public class Producto {
     @Override
     public String toString() {
         String disponible;
-        if(estado){
-            disponible="Disponible";
-        }else{
-            disponible="No disponible";
+        if (estado) {
+            disponible = "Disponible";
+        } else {
+            disponible = "No disponible";
         }
-        return idProducto + ", " + descripcion + " $" + precioUnitario + "- " + disponible;
+        return idProducto + ", " + nombreProducto + " $" + precioUnitario + " / stock:" + stock + "-" + disponible;
     }
-    
-    
 
-   
-    
 }
