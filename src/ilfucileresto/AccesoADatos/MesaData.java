@@ -21,14 +21,16 @@ public class MesaData {
 
     public void guardarMesa(Mesa mesa) {
         try {
-            String sql = "Insert into mesa(estadoMesa,capacidad) values (?,?)";
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setBoolean(1, mesa.isEstadoMesa());
-            ps.setInt(2, mesa.getCapacidad());
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                mesa.setIdMesa(rs.getInt(1));
+            String sql = "INSERT INTO mesa(idMesa,estadoMesa,capacidad) VALUES (?,?,?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,mesa.getIdMesa());
+            ps.setBoolean(2, mesa.isEstadoMesa());
+            ps.setInt(3, mesa.getCapacidad());
+            int exito = ps.executeUpdate();
+            //No es auto incremental porque el idMesa es el NroMesa
+            //ResultSet rs = ps.getGeneratedKeys();
+            if (exito ==1) {
+                //mesa.setIdMesa(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Mesa añadida con exito ");
             }
             ps.close();
