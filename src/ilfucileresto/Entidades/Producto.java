@@ -75,7 +75,8 @@ public class Producto {
         } else {
             disponible = "No disponible";
         }
-        return idProducto + ", " + nombreProducto + " $" + precioUnitario + " / stock:" + stock + "-" + disponible;
+        
+        return idProducto + " - " + nombreProducto + " $" + precioUnitario + " / Stock: " + stock + " - " + disponible;
     }
 
 }

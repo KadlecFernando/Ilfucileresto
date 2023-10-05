@@ -12,6 +12,14 @@ public class Mesa {
         this.capacidad = capacidad;
     }
 
+    public Mesa(int idMesa, int capacidad) {
+        this.idMesa = idMesa;
+        this.estadoMesa = false;
+        this.capacidad = capacidad;
+    }
+    
+    
+
     public Mesa(boolean estadoMesa, int capacidad) {
         this.estadoMesa = estadoMesa;
         this.capacidad = capacidad;

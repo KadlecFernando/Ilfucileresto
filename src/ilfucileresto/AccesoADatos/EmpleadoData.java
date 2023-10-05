@@ -21,7 +21,7 @@ public class EmpleadoData {
 
     public void guardarEmpleado(Empleado empleado) {
         try {
-            String sql = "Insert into empleado(apellido,nombre,DNI,puesto,user,password,estado) values (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO empleado(apellido,nombre,DNI,puesto,user,password,estado) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, empleado.getApellido());
             ps.setString(2, empleado.getNombre());
@@ -34,7 +34,7 @@ public class EmpleadoData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 empleado.setIdEmpleado(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "empleado añadido con exito ");
+                JOptionPane.showMessageDialog(null, "Empleado añadido con exito ");
             }
             ps.close();
         } catch (SQLException ex) {
