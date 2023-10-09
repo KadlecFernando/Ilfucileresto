@@ -4,15 +4,13 @@ package ilfucileresto.AccesoADatos;
 import ilfucileresto.Entidades.Empleado;
 import ilfucileresto.Entidades.Mesa;
 import ilfucileresto.Entidades.Pedido;
-import ilfucileresto.Entidades.pedido;
-import ilfucileresto.Entidades.pedido;
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -117,17 +115,25 @@ public class PedidoData {
         }
     }
     
-    public List<Pedido> listarPedidosPorFecha(Date fecha) {
+    public List<Pedido> listarPedidosPorFecha(LocalDate fecha) {
         List<Pedido> pedidos = new ArrayList<>();
         try {
-            String sql = "SELECT idPedido,importe FROM pedido WHERE DATE(fechaHora) = ?";
+            String sql = "SELECT * FROM pedido WHERE DATE(fechaHora) = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDate(1, (java.sql.Date) fecha);
+            ps.setDate(1, java.sql.Date.valueOf(fecha));
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Pedido pedido = new pedido();
+                Pedido pedido = new Pedido();
                 pedido.setIdPedido(rs.getInt("idPedido"));
+                Mesa m = mesaData.buscarMesa(rs.getInt("idMesa"));
+                pedido.setMesa(m);
+                Empleado e = empleadoData.buscarEmpleado(rs.getInt("idEmpleado"));
+                pedido.setEmpleado(e);
+                Timestamp fe = rs.getTimestamp("fechaHora");
+                pedido.setFechaHora(fe.toLocalDateTime());
                 pedido.setImporte(rs.getDouble("importe"));
+                pedido.setEstado(rs.getInt("estado"));
+                pedido.setPago(rs.getBoolean("pago"));
                 pedidos.add(pedido);
             }
             ps.close();
@@ -137,20 +143,30 @@ public class PedidoData {
         return pedidos;
     }
     
-    public List<Pedido> listarPedidosPorMesero(int idMesero) {
+    public List<Pedido> listarPedidosPorMesero(int idMesero,LocalDate fech) {
+
         //Ver parametro opcional para fecha...
         List<Pedido> pedidos = new ArrayList<>();
         try {
-            String sql = "SELECT idPedido,idMesa,fechaHora,importe,estado,pago FROM pedido WHERE idEmpleado = ?";
+            String sql = "SELECT * FROM pedido WHERE idEmpleado = ? ";
+            if (fech!=null){
+                sql+= " AND DATE(fechaHora)= ? ";
+            }
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMesero);
+            if (fech!=null){
+                ps.setDate(2, java.sql.Date.valueOf(fech));
+            }
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Pedido pedido = new pedido();
+                Pedido pedido = new Pedido();
                 pedido.setIdPedido(rs.getInt("idPedido"));
-                pedido.getMesa().setIdMesa(rs.getInt("idMesa"));
-                Timestamp fecha = rs.getTimestamp("fechaHora");
-                pedido.setFechaHora(fecha.toLocalDateTime());
+                Mesa m = mesaData.buscarMesa(rs.getInt("idMesa"));
+                pedido.setMesa(m);
+                Empleado e = empleadoData.buscarEmpleado(rs.getInt("idEmpleado"));
+                pedido.setEmpleado(e);
+                Timestamp fe = rs.getTimestamp("fechaHora");
+                pedido.setFechaHora(fe.toLocalDateTime());
                 pedido.setImporte(rs.getDouble("importe"));
                 pedido.setEstado(rs.getInt("estado"));
                 pedido.setPago(rs.getBoolean("pago"));
