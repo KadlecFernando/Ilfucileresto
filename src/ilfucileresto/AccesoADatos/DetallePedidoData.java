@@ -1,6 +1,8 @@
 package ilfucileresto.AccesoADatos;
 // El Sebas: El rockanroll no morirá jamás ♡♡♡♡♡♡♡ 
 
+import ilfucileresto.Entidades.Pedido;
+import ilfucileresto.Entidades.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,13 +21,13 @@ public class DetallePedidoData {
         con = Conexion.getConnection();
     }
 
-    public void agregarDetallePedido(int idPedido, int idProducto, int cant) {
+    public void agregarDetallePedido(Pedido pedido, Producto producto, int cant) {
         String sql = "Insert into detallePedido values(?,?,?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, idPedido);
-            ps.setInt(2, idProducto);
+            ps.setInt(1, pedido.getIdPedido());
+            ps.setInt(2, producto.getIdProducto());
             ps.setInt(3, cant);
             int fila=ps.executeUpdate();
             if(fila>0){
