@@ -7,8 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 
 public class DetallePedidoData {
@@ -22,7 +21,7 @@ public class DetallePedidoData {
     }
 
     public void agregarDetallePedido(Pedido pedido, Producto producto, int cant) {
-        String sql = "Insert into detallePedido values(?,?,?)";
+        String sql = "INSERT INTO detallePedido VALUES(?,?,?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -31,7 +30,7 @@ public class DetallePedidoData {
             ps.setInt(3, cant);
             int fila=ps.executeUpdate();
             if(fila>0){
-                JOptionPane.showMessageDialog(null, "El detallePedido se agrego con exito");
+                JOptionPane.showMessageDialog(null, "El detalle del pedido se agregó con éxito");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -39,16 +38,16 @@ public class DetallePedidoData {
         }
     }
 
-    public void eliminarDetallePedido(int idProducto, int idPedido) {
-        String sql = "Delete from detallePedido where idProducto=? AND idPedido=?";
+    public void eliminarDetallePedido(Pedido pedido, Producto producto) {
+        String sql = "DELETE FROM detallePedido WHERE idPedido=? AND idProducto=?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, idProducto);
-            ps.setInt(2, idPedido);
+            ps.setInt(1, pedido.getIdPedido());
+            ps.setInt(2, producto.getIdProducto());
             int fila = ps.executeUpdate();
             if (fila > 0) {
-                JOptionPane.showMessageDialog(null, "Producto eliminado del pedido");
+                JOptionPane.showMessageDialog(null, "Producto eliminado del pedido.");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -56,17 +55,17 @@ public class DetallePedidoData {
         }
     }
 
-    public void actualizarDetallePedido(int idProducto, int idPedido, int cantidad) {
-        String sql = "Update detallePedido set cantidad=? where idProducto=? AND idPedido=?";
+    public void actualizarDetallePedido(Pedido pedido, Producto producto, int cantidad) {
+        String sql = "UPDATE detallePedido SET cantidad=? WHERE idPedido=? AND idProducto=?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, cantidad);
-            ps.setInt(2, idProducto);
-            ps.setInt(3, idPedido);
+            ps.setInt(2, pedido.getIdPedido());
+            ps.setInt(3, producto.getIdProducto());
             int fila = ps.executeUpdate();
             if (fila > 0) {
-                JOptionPane.showMessageDialog(null, "Producto eliminado del pedido");
+                JOptionPane.showMessageDialog(null, "Producto eliminado del pedido.");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -77,20 +76,20 @@ public class DetallePedidoData {
 //    FROM `producto` p join detallepedido d on p.idProducto=d.idProducto WHERE d.idProducto=2
 //    and d.idPedido=2 
 
-    public double calcularSubtotal(int idProducto, int cantidad) {
+    public double calcularSubtotal(Producto producto, int cantidad) {
         double subtotal = 0;
-        String sql = "Select precioUnitario from producto where idProducto=?";
+        String sql = "SELECT precioUnitario FROM producto WHERE idProducto=?";
         PreparedStatement ps = null;
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, idProducto);
+            ps.setInt(1, producto.getIdProducto());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 subtotal = rs.getDouble("precioUnitario");
                 subtotal *= cantidad;
             } else {
-                JOptionPane.showMessageDialog(null, "Producto no encontrado");
+                JOptionPane.showMessageDialog(null, "Producto no encontrado.");
             }
 
             ps.close();
@@ -100,14 +99,16 @@ public class DetallePedidoData {
         return subtotal;
     }
 
-    public double calcularTotal(int idPedido) {
-        String sql = "SELECT sum(p.precioUnitario*d.cantidad) as total FROM `producto` p "
-                + " join detallepedido d on p.idProducto=d.idProducto WHERE d.idPedido=?";
+    public double calcularTotal(Pedido pedido) {
+        String sql = "SELECT SUM(p.precioUnitario*d.cantidad) AS total"
+                   + "  FROM `producto` p "
+                   + "      JOIN detallepedido d ON p.idProducto=d.idProducto"
+                   + " WHERE d.idPedido=?";
         PreparedStatement ps = null;
         double total = 0;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, idPedido);
+            ps.setInt(1, pedido.getIdPedido());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getDouble("total");
