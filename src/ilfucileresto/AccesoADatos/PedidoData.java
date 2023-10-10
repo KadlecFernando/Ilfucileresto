@@ -132,7 +132,7 @@ public class PedidoData {
         return pedidos;
     }
 
-    public List<Pedido> listarPedidosPorMesero(int idMesero, LocalDate fech) {
+    public List<Pedido> listarPedidosPorMesero(Empleado mesero, LocalDate fech) {
 
         //Ver parametro opcional para fecha...
         List<Pedido> pedidos = new ArrayList<>();
@@ -142,7 +142,7 @@ public class PedidoData {
                 sql += " AND DATE(fechaHora)= ? ";
             }
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idMesero);
+            ps.setInt(1, mesero.getIdEmpleado());
             if (fech != null) {
                 ps.setDate(2, java.sql.Date.valueOf(fech));
             }
@@ -158,13 +158,13 @@ public class PedidoData {
         return pedidos;
     }
 
-    public List<Pedido> listarPedidosPorMesaPorHora(int idMesa, LocalDate dia, LocalTime horaDesde, LocalTime horaHasta) {
+    public List<Pedido> listarPedidosPorMesaPorHora(Mesa mesa, LocalDate dia, LocalTime horaDesde, LocalTime horaHasta) {
         List<Pedido> pedidos = new ArrayList<>();
 
         try {
             String sql = "Select idPedido from pedido Where idMesa=? AND Date(fechaHora)=? AND Time(fechaHora) Between Time(?) AND time(?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idMesa);
+            ps.setInt(1, mesa.getIdMesa());
             ps.setDate(2, java.sql.Date.valueOf(dia));
             ps.setTime(3, java.sql.Time.valueOf(horaDesde));
             ps.setTime(4, java.sql.Time.valueOf(horaHasta));

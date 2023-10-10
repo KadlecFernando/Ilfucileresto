@@ -47,7 +47,7 @@ public class Ilfucileresto {
         //System.out.println(d);
 //        LocalDate g= null;
         DetallePedidoData dp = new DetallePedidoData();
-        System.out.println(dp.calcularTotal(2));
+
 //        List <Pedido> p = PD.listarPedidosPorFecha(f);
                 //        
                 //        for (Pedido pedido : p) {
