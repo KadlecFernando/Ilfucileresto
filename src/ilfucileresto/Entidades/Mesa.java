@@ -3,24 +3,16 @@ package ilfucileresto.Entidades;
 public class Mesa {
 
     private int idMesa;
-    private boolean estadoMesa;
+    private int estadoMesa;
     private int capacidad;
 
-    public Mesa(int idMesa, boolean estadoMesa, int capacidad) {
+    public Mesa(int idMesa, int estadoMesa, int capacidad) {
         this.idMesa = idMesa;
         this.estadoMesa = estadoMesa;
         this.capacidad = capacidad;
     }
 
-    public Mesa(int idMesa, int capacidad) {
-        this.idMesa = idMesa;
-        this.estadoMesa = false;
-        this.capacidad = capacidad;
-    }
-    
-    
-
-    public Mesa(boolean estadoMesa, int capacidad) {
+    public Mesa(int estadoMesa, int capacidad) {
         this.estadoMesa = estadoMesa;
         this.capacidad = capacidad;
     }
@@ -36,11 +28,11 @@ public class Mesa {
         this.idMesa = idMesa;
     }
 
-    public boolean isEstadoMesa() {
+    public int getEstadoMesa() {
         return estadoMesa;
     }
 
-    public void setEstadoMesa(boolean estadoMesa) {
+    public void setEstadoMesa(int estadoMesa) {
         this.estadoMesa = estadoMesa;
     }
 

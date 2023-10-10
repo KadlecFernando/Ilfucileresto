@@ -11,9 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -22,10 +21,10 @@ public class PedidoData {
     private Connection con = null;
     private MesaData mesaData = new MesaData();
     private EmpleadoData empleadoData = new EmpleadoData();
-    
+
     public PedidoData() {
         con = Conexion.getConnection();
-        
+
     }
 
     public void guardarPedido(Pedido pedido) {
@@ -82,12 +81,12 @@ public class PedidoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido " + ex.getMessage());
         }
-        
+
         return pedido;
     }
-    
+
     public void modificarPedido(Pedido pedido) {
-        
+
         String sql = "UPDATE pedido SET idMesa=?, idEmpleado=?, fechaHora=?, importe=?, estado=?, pago=? WHERE idPedido = ?";
         PreparedStatement ps = null;
         int exito = 0;
@@ -99,8 +98,8 @@ public class PedidoData {
             ps.setTimestamp(3, fecha);
             ps.setDouble(4, pedido.getImporte());
             ps.setInt(5, pedido.getEstado());
-            ps.setBoolean(6,pedido.isPago());
-            ps.setInt(7,pedido.getIdPedido());
+            ps.setBoolean(6, pedido.isPago());
+            ps.setInt(7, pedido.getIdPedido());
 
             exito = ps.executeUpdate();
             if (exito == 1) {
@@ -114,26 +113,16 @@ public class PedidoData {
             }
         }
     }
-    
+
     public List<Pedido> listarPedidosPorFecha(LocalDate fecha) {
         List<Pedido> pedidos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM pedido WHERE DATE(fechaHora) = ?";
+            String sql = "SELECT idPedido FROM pedido WHERE DATE(fechaHora) = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, java.sql.Date.valueOf(fecha));
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Pedido pedido = new Pedido();
-                pedido.setIdPedido(rs.getInt("idPedido"));
-                Mesa m = mesaData.buscarMesa(rs.getInt("idMesa"));
-                pedido.setMesa(m);
-                Empleado e = empleadoData.buscarEmpleado(rs.getInt("idEmpleado"));
-                pedido.setEmpleado(e);
-                Timestamp fe = rs.getTimestamp("fechaHora");
-                pedido.setFechaHora(fe.toLocalDateTime());
-                pedido.setImporte(rs.getDouble("importe"));
-                pedido.setEstado(rs.getInt("estado"));
-                pedido.setPago(rs.getBoolean("pago"));
+                Pedido pedido = buscarPedido(rs.getInt("idPedido"));
                 pedidos.add(pedido);
             }
             ps.close();
@@ -142,34 +131,24 @@ public class PedidoData {
         }
         return pedidos;
     }
-    
-    public List<Pedido> listarPedidosPorMesero(int idMesero,LocalDate fech) {
+
+    public List<Pedido> listarPedidosPorMesero(int idMesero, LocalDate fech) {
 
         //Ver parametro opcional para fecha...
         List<Pedido> pedidos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM pedido WHERE idEmpleado = ? ";
-            if (fech!=null){
-                sql+= " AND DATE(fechaHora)= ? ";
+            String sql = "SELECT idPedido FROM pedido WHERE idEmpleado = ? ";
+            if (fech != null) {
+                sql += " AND DATE(fechaHora)= ? ";
             }
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMesero);
-            if (fech!=null){
+            if (fech != null) {
                 ps.setDate(2, java.sql.Date.valueOf(fech));
             }
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Pedido pedido = new Pedido();
-                pedido.setIdPedido(rs.getInt("idPedido"));
-                Mesa m = mesaData.buscarMesa(rs.getInt("idMesa"));
-                pedido.setMesa(m);
-                Empleado e = empleadoData.buscarEmpleado(rs.getInt("idEmpleado"));
-                pedido.setEmpleado(e);
-                Timestamp fe = rs.getTimestamp("fechaHora");
-                pedido.setFechaHora(fe.toLocalDateTime());
-                pedido.setImporte(rs.getDouble("importe"));
-                pedido.setEstado(rs.getInt("estado"));
-                pedido.setPago(rs.getBoolean("pago"));
+                Pedido pedido = this.buscarPedido(rs.getInt("idPedido"));
                 pedidos.add(pedido);
             }
             ps.close();
@@ -178,10 +157,42 @@ public class PedidoData {
         }
         return pedidos;
     }
-    
-    
-    
-    
 
+    public List<Pedido> listarPedidosPorMesaPorHora(int idMesa, LocalDate dia, LocalTime horaDesde, LocalTime horaHasta) {
+        List<Pedido> pedidos = new ArrayList<>();
+
+        try {
+            String sql = "Select idPedido from pedido Where idMesa=? AND Date(fechaHora)=? AND Time(fechaHora) Between Time(?) AND time(?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idMesa);
+            ps.setDate(2, java.sql.Date.valueOf(dia));
+            ps.setTime(3, java.sql.Time.valueOf(horaDesde));
+            ps.setTime(4, java.sql.Time.valueOf(horaHasta));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pedido pedido = buscarPedido(rs.getInt("idPedido"));
+                pedidos.add(pedido);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido." + ex.getMessage());
+        }
+        return pedidos;
+    }
+
+    public double calcularIngresosPorFecha(LocalDate fecha) {
+        double total=-1;
+        try {
+            String sql = "SELECT sum(importe) as total FROM pedido WHERE DATE(fechaHora) = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, java.sql.Date.valueOf(fecha));
+            ResultSet rs = ps.executeQuery();
+            total = rs.getInt("total");
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido." + ex.getMessage());
+        }
+        return total;
+    }
 
 }

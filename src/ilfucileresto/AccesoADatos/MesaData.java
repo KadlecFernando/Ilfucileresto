@@ -24,7 +24,7 @@ public class MesaData {
             String sql = "INSERT INTO mesa(idMesa,estadoMesa,capacidad) VALUES (?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1,mesa.getIdMesa());
-            ps.setBoolean(2, mesa.isEstadoMesa());
+            ps.setInt(2, mesa.getEstadoMesa());
             ps.setInt(3, mesa.getCapacidad());
             int exito = ps.executeUpdate();
             //No es auto incremental porque el idMesa es el NroMesa
@@ -54,7 +54,7 @@ public class MesaData {
             if (rs.next()) {
                 mesa = new Mesa();
                 mesa.setIdMesa(id);
-                mesa.setEstadoMesa(rs.getBoolean("estadoMesa"));
+                mesa.setEstadoMesa(rs.getInt("estadoMesa"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la mesa.");
@@ -72,7 +72,7 @@ public class MesaData {
         int exito = 0;
         try {
             ps = con.prepareStatement(sql);
-            ps.setBoolean(1, mesa.isEstadoMesa());
+            ps.setInt(1, mesa.getEstadoMesa());
             ps.setInt(2, mesa.getCapacidad());
             ps.setInt(3, mesa.getIdMesa());
             exito = ps.executeUpdate();
@@ -98,7 +98,7 @@ public class MesaData {
             while (rs.next()) {
                 Mesa mesa = new Mesa();
                 mesa.setIdMesa(rs.getInt("idMesa"));
-                mesa.setEstadoMesa(rs.getBoolean("estadoMesa"));
+                mesa.setEstadoMesa(rs.getInt("estadoMesa"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
                 mesas.add(mesa);
             }
