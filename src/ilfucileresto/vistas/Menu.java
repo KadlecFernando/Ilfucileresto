@@ -54,151 +54,149 @@ public class Menu extends javax.swing.JFrame {
         jMenu9 = new javax.swing.JMenu();
         jMenu10 = new javax.swing.JMenu();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ImageIcon icono = new ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/fondoS.jpg"));
-        Image miImagen = icono.getImage();
+        jPanel1 = new javax.swing.JPanel();
+        btnMesas = new javax.swing.JButton();
+        jPanel2 = new FondoPanel();
+        btnPedidos = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
+        btnPedidos1 = new javax.swing.JButton();
+        btnPedidos2 = new javax.swing.JButton();
+        ImageIcon icono=new ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/fondoS.jpg"));
+        Image miImagen=icono.getImage();
         Escritorio = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
-                g.drawImage(miImagen, 0, 0, getWidth(), getHeight(),this);
-            }};
-            Escritorio = new javax.swing.JDesktopPane();
-            jPanel1 = new javax.swing.JPanel();
-            btnMesas = new javax.swing.JButton();
-            jPanel2 = new FondoPanel();
-            btnPedidos = new javax.swing.JButton();
-            btnMenu = new javax.swing.JButton();
-            btnPedidos1 = new javax.swing.JButton();
-            btnPedidos2 = new javax.swing.JButton();
+                g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
 
-            jMenu3.setText("File");
-            jMenuBar1.add(jMenu3);
+        jMenu3.setText("File");
+        jMenuBar1.add(jMenu3);
 
-            jMenu4.setText("Edit");
-            jMenuBar1.add(jMenu4);
+        jMenu4.setText("Edit");
+        jMenuBar1.add(jMenu4);
 
-            jMenu5.setText("File");
-            jMenuBar2.add(jMenu5);
+        jMenu5.setText("File");
+        jMenuBar2.add(jMenu5);
 
-            jMenu6.setText("Edit");
-            jMenuBar2.add(jMenu6);
+        jMenu6.setText("Edit");
+        jMenuBar2.add(jMenu6);
 
-            jMenu7.setText("File");
-            jMenuBar3.add(jMenu7);
+        jMenu7.setText("File");
+        jMenuBar3.add(jMenu7);
 
-            jMenu8.setText("Edit");
-            jMenuBar3.add(jMenu8);
+        jMenu8.setText("Edit");
+        jMenuBar3.add(jMenu8);
 
-            jMenu9.setText("File");
-            jMenuBar4.add(jMenu9);
+        jMenu9.setText("File");
+        jMenuBar4.add(jMenu9);
 
-            jMenu10.setText("Edit");
-            jMenuBar4.add(jMenu10);
+        jMenu10.setText("Edit");
+        jMenuBar4.add(jMenu10);
 
-            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            setPreferredSize(new java.awt.Dimension(1280, 720));
-            setResizable(false);
-            getContentPane().setLayout(null);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-            Escritorio.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(102, 32, 6));
 
-            javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
-            Escritorio.setLayout(EscritorioLayout);
-            EscritorioLayout.setHorizontalGroup(
-                EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 1040, Short.MAX_VALUE)
-            );
-            EscritorioLayout.setVerticalGroup(
-                EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 0, Short.MAX_VALUE)
-            );
+        btnMesas.setBackground(new java.awt.Color(102, 32, 6));
+        btnMesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/mesa-del-comedor.png"))); // NOI18N
 
-            getContentPane().add(Escritorio);
-            Escritorio.setBounds(240, 0, 1040, 720);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 171, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 168, Short.MAX_VALUE)
+        );
 
-            jPanel1.setBackground(new java.awt.Color(102, 32, 6));
+        btnPedidos.setBackground(new java.awt.Color(102, 32, 6));
+        btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/comida.png"))); // NOI18N
 
-            btnMesas.setBackground(new java.awt.Color(102, 32, 6));
-            btnMesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/mesa-del-comedor.png"))); // NOI18N
+        btnMenu.setBackground(new java.awt.Color(102, 32, 6));
+        btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/menu.png"))); // NOI18N
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
 
-            javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-            jPanel2.setLayout(jPanel2Layout);
-            jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 171, Short.MAX_VALUE)
-            );
-            jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 168, Short.MAX_VALUE)
-            );
+        btnPedidos1.setBackground(new java.awt.Color(102, 32, 6));
+        btnPedidos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/lista-de-quehaceres.png"))); // NOI18N
+        btnPedidos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidos1ActionPerformed(evt);
+            }
+        });
 
-            btnPedidos.setBackground(new java.awt.Color(102, 32, 6));
-            btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/comida.png"))); // NOI18N
+        btnPedidos2.setBackground(new java.awt.Color(102, 32, 6));
+        btnPedidos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/salida-de-emergencia.png"))); // NOI18N
+        btnPedidos2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidos2ActionPerformed(evt);
+            }
+        });
 
-            btnMenu.setBackground(new java.awt.Color(102, 32, 6));
-            btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/menu.png"))); // NOI18N
-            btnMenu.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    btnMenuActionPerformed(evt);
-                }
-            });
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnPedidos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMesas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMenu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPedidos1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPedidos2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPedidos1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPedidos2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
+        );
 
-            btnPedidos1.setBackground(new java.awt.Color(102, 32, 6));
-            btnPedidos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/lista-de-quehaceres.png"))); // NOI18N
-            btnPedidos1.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    btnPedidos1ActionPerformed(evt);
-                }
-            });
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 249, 720);
 
-            btnPedidos2.setBackground(new java.awt.Color(102, 32, 6));
-            btnPedidos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/salida-de-emergencia.png"))); // NOI18N
-            btnPedidos2.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    btnPedidos2ActionPerformed(evt);
-                }
-            });
+        javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
+        Escritorio.setLayout(EscritorioLayout);
+        EscritorioLayout.setHorizontalGroup(
+            EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1030, Short.MAX_VALUE)
+        );
+        EscritorioLayout.setVerticalGroup(
+            EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 720, Short.MAX_VALUE)
+        );
 
-            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-            jPanel1.setLayout(jPanel1Layout);
-            jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(59, 59, 59)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnPedidos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnMesas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnMenu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPedidos1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPedidos2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(48, Short.MAX_VALUE))
-            );
-            jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(btnMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(btnPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(btnPedidos1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addGap(18, 18, 18)
-                    .addComponent(btnPedidos2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(36, 36, 36))
-            );
+        getContentPane().add(Escritorio);
+        Escritorio.setBounds(250, 0, 1030, 720);
 
-            getContentPane().add(jPanel1);
-            jPanel1.setBounds(0, 0, 249, 720);
-
-            pack();
-        }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
