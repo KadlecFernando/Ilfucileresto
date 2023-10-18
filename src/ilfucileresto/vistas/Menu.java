@@ -190,7 +190,7 @@ public class Menu extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1160, Short.MAX_VALUE)
+            .addGap(0, 1150, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +198,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         getContentPane().add(Escritorio);
-        Escritorio.setBounds(120, 0, 1160, 690);
+        Escritorio.setBounds(130, 0, 1150, 690);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
