@@ -204,7 +204,9 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        // TODO add your handling code here:
+        Productos pr = new Productos();
+        pr.setVisible(true);
+        Escritorio.add(pr);
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnPedidos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidos1ActionPerformed
