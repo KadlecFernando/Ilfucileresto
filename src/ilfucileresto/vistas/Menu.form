@@ -102,7 +102,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-84,0,0,5,0"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-48,0,0,5,0"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -131,8 +131,8 @@
               <Component id="btnMesas" max="32767" attributes="0"/>
               <Component id="btnPedidos" alignment="0" max="32767" attributes="0"/>
               <Component id="btnMenu" alignment="0" max="32767" attributes="0"/>
-              <Component id="btnPedidos1" alignment="0" max="32767" attributes="0"/>
-              <Component id="btnPedidos2" max="32767" attributes="0"/>
+              <Component id="btnAdministracion" alignment="0" max="32767" attributes="0"/>
+              <Component id="btnSalir" max="32767" attributes="0"/>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="lblUsuario" min="-2" pref="101" max="-2" attributes="0"/>
@@ -154,9 +154,9 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="btnMenu" min="-2" pref="88" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="btnPedidos1" min="-2" pref="89" max="-2" attributes="0"/>
+                  <Component id="btnAdministracion" min="-2" pref="89" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                  <Component id="btnPedidos2" min="-2" pref="78" max="-2" attributes="0"/>
+                  <Component id="btnSalir" min="-2" pref="78" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -172,6 +172,9 @@
               <Image iconType="3" name="/ilfucileresto/Imagenes/mesa-del-comedor.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMesasActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
           <AuxValues>
@@ -214,7 +217,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnPedidos1">
+        <Component class="javax.swing.JButton" name="btnAdministracion">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="6" green="20" red="66" type="rgb"/>
@@ -224,10 +227,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPedidos1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdministracionActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnPedidos2">
+        <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="6" green="20" red="66" type="rgb"/>
@@ -237,7 +240,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPedidos2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblUsuario">
@@ -254,20 +257,25 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDesktopPane" name="Escritorio">
+      <Properties>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1145, 690]"/>
+        </Property>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDesktopPane(){&#xa;    public void paintComponent(Graphics g){&#xa;        g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);&#xa;    }&#xa;}"/>
         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icono=new ImageIcon(getClass().getResource(&quot;/ilfucileresto/Imagenes/fondoS.jpg&quot;));&#xa;Image miImagen=icono.getImage();"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="130" y="0" width="1150" height="690"/>
+          <AbsoluteConstraints x="130" y="0" width="1145" height="690"/>
         </Constraint>
       </Constraints>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="1150" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1145" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

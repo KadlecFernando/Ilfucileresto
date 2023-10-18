@@ -8,6 +8,9 @@ package ilfucileresto.vistas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.UIDefaults;
@@ -59,8 +62,8 @@ public class Menu extends javax.swing.JFrame {
         jPanel2 = new FondoPanel();
         btnPedidos = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
-        btnPedidos1 = new javax.swing.JButton();
-        btnPedidos2 = new javax.swing.JButton();
+        btnAdministracion = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         lblUsuario = new javax.swing.JLabel();
         ImageIcon icono=new ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/fondoS.jpg"));
         Image miImagen=icono.getImage();
@@ -103,6 +106,11 @@ public class Menu extends javax.swing.JFrame {
 
         btnMesas.setBackground(new java.awt.Color(102, 32, 6));
         btnMesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/mesa-del-comedor.png"))); // NOI18N
+        btnMesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMesasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -126,19 +134,19 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnPedidos1.setBackground(new java.awt.Color(102, 32, 6));
-        btnPedidos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/lista-de-quehaceres.png"))); // NOI18N
-        btnPedidos1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdministracion.setBackground(new java.awt.Color(102, 32, 6));
+        btnAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/lista-de-quehaceres.png"))); // NOI18N
+        btnAdministracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPedidos1ActionPerformed(evt);
+                btnAdministracionActionPerformed(evt);
             }
         });
 
-        btnPedidos2.setBackground(new java.awt.Color(102, 32, 6));
-        btnPedidos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/salida-de-emergencia.png"))); // NOI18N
-        btnPedidos2.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setBackground(new java.awt.Color(102, 32, 6));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/salida-de-emergencia.png"))); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPedidos2ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
@@ -156,8 +164,8 @@ public class Menu extends javax.swing.JFrame {
             .addComponent(btnMesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnPedidos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnPedidos2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnAdministracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,20 +185,22 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(btnPedidos1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdministracion, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addComponent(btnPedidos2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 130, 690);
 
+        Escritorio.setPreferredSize(new java.awt.Dimension(1145, 690));
+
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1150, Short.MAX_VALUE)
+            .addGap(0, 1145, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +208,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         getContentPane().add(Escritorio);
-        Escritorio.setBounds(130, 0, 1150, 690);
+        Escritorio.setBounds(130, 0, 1145, 690);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -207,15 +217,31 @@ public class Menu extends javax.swing.JFrame {
         Productos pr = new Productos();
         pr.setVisible(true);
         Escritorio.add(pr);
+        try {
+            pr.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnMenuActionPerformed
 
-    private void btnPedidos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidos1ActionPerformed
+    private void btnAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministracionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnPedidos1ActionPerformed
+    }//GEN-LAST:event_btnAdministracionActionPerformed
 
-    private void btnPedidos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidos2ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnPedidos2ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasActionPerformed
+        Mesas ms = new Mesas();
+        ms.setVisible(true);
+        Escritorio.add(ms);
+        try {
+            ms.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnMesasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,6 +252,9 @@ public class Menu extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        UIManager.put("nimbusBase", new Color(173,89,42));
+        UIManager.put("control", new Color(224,154,114));
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -254,11 +283,11 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JButton btnAdministracion;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnMesas;
     private javax.swing.JButton btnPedidos;
-    private javax.swing.JButton btnPedidos1;
-    private javax.swing.JButton btnPedidos2;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
