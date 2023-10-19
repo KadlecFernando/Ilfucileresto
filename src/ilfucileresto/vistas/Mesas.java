@@ -8,7 +8,10 @@ package ilfucileresto.vistas;
 import ilfucileresto.AccesoADatos.MesaData;
 import ilfucileresto.Entidades.Mesa;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -129,6 +132,23 @@ public class Mesas extends javax.swing.JInternalFrame {
             } else if (mesa.getEstadoMesa()==1){
                 boton.setBackground(Color.red);
             }
+            boton.setFocusable(false);
+            boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            boton.addActionListener(new ActionListener(){
+
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    if (boton.getBackground()==Color.green){
+                        boton.setBackground(Color.red);
+                        mesa.setEstadoMesa(1);
+                        mD.modificarMesa(mesa);
+                    }else{
+                        boton.setBackground(Color.green);
+                        mesa.setEstadoMesa(0);
+                        mD.modificarMesa(mesa);
+                    }
+                }
+            });
             pnMesas.add(boton);
             boton.setVisible(true);
             contador += 1;
