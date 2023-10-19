@@ -5,7 +5,13 @@
  */
 package ilfucileresto.vistas;
 
+import ilfucileresto.AccesoADatos.MesaData;
+import ilfucileresto.Entidades.Mesa;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -14,6 +20,10 @@ import javax.swing.JButton;
  * @author mrubio
  */
 public class Mesas extends javax.swing.JInternalFrame {
+
+    MesaData mD = new MesaData();
+    List <Mesa> mesas;
+    HashMap <Integer,JButton> botones = new HashMap();
 
     /**
      * Creates new form Mesas
@@ -34,7 +44,6 @@ public class Mesas extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
         scroll1 = new javax.swing.JScrollPane();
         pnMesas = new javax.swing.JPanel();
 
@@ -64,39 +73,27 @@ public class Mesas extends javax.swing.JInternalFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 101, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
-        );
+        scroll1.setPreferredSize(new java.awt.Dimension(956, 586));
 
-        pnMesas.setPreferredSize(new java.awt.Dimension(954, 2000));
-        pnMesas.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        pnMesas.setPreferredSize(new java.awt.Dimension(954, 586));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 1, 1);
+        flowLayout1.setAlignOnBaseline(true);
+        pnMesas.setLayout(flowLayout1);
         scroll1.setViewportView(pnMesas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(scroll1)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1161, Short.MAX_VALUE)
+            .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,32 +106,57 @@ public class Mesas extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel pnMesas;
     private javax.swing.JScrollPane scroll1;
     // End of variables declaration//GEN-END:variables
     public void mostrarMesas() {
-        ImageIcon icono = new ImageIcon(getClass().getResource("/ilfucileresto/imagenes/comedor.png"));
 
-        for (int i = 1; i < 11; i++) {
+        ImageIcon icono = new ImageIcon(getClass().getResource("/ilfucileresto/imagenes/comedor.png"));
+        int contador = 0;
+        int altoPlus = pnMesas.getHeight();
+
+        mesas = mD.listarMesas();
+
+        for (Mesa mesa : mesas) {
             JButton boton = new JButton();
-            boton.setName("btnMesa" + i);
+            boton.setName("btnMesa" + (mesa.getIdMesa()));
             boton.setIcon(icono);
-            boton.setText("Mesa Nº " + i);
+            boton.setText("Mesa Nº " + (mesa.getIdMesa()));
             boton.setHorizontalTextPosition(JButton.CENTER);
-            boton.setVerticalTextPosition(JButton.BOTTOM);
-            if (i % 2 == 0) {
+            boton.setVerticalTextPosition(JButton.TOP);
+            if (mesa.getEstadoMesa()==0) {
                 boton.setBackground(Color.green);
-            } else {
+            } else if (mesa.getEstadoMesa()==1){
                 boton.setBackground(Color.red);
             }
             pnMesas.add(boton);
             boton.setVisible(true);
-         
-        }
-        pnMesas.revalidate();
-        pnMesas.repaint();
+            contador += 1;
 
+            if (contador == 7) {
+                int ancho = pnMesas.getWidth();
+                altoPlus += 200;
+                pnMesas.setPreferredSize(new Dimension(ancho, altoPlus));
+                pnMesas.revalidate();
+                pnMesas.repaint();
+                contador = 0;
+            }
+            
+            botones.put(mesa.getIdMesa(), boton);
+            
+        }
+
+    }
+
+    public void actualizarColor(Mesa mesa) {
+        
+        JButton boton=botones.get(mesa.getIdMesa());
+        
+        if (mesa.getEstadoMesa() == 0) {
+            boton.setBackground(Color.green);
+        } else if (mesa.getEstadoMesa() == 1) {
+            boton.setBackground(Color.red);
+        }
     }
 
 }

@@ -5,10 +5,13 @@
  */
 package ilfucileresto.vistas;
 
+import ilfucileresto.AccesoADatos.MesaData;
+import ilfucileresto.Entidades.Mesa;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.beans.PropertyVetoException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -22,7 +25,8 @@ import javax.swing.plaf.ColorUIResource;
  * @author Loa
  */
 public class Menu extends javax.swing.JFrame {
-
+    boolean flagMesas=false;
+    Mesas ms = new Mesas();
     /**
      * Creates new form Menu
      */
@@ -233,9 +237,19 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasActionPerformed
-        Mesas ms = new Mesas();
-        ms.setVisible(true);
-        Escritorio.add(ms);
+        
+        if (flagMesas==false){
+            ms.setVisible(true);
+            Escritorio.add(ms);
+            flagMesas=true;
+        }else{
+            MesaData mD = new MesaData();
+            List <Mesa> mesas = mD.listarMesas();
+            for (Mesa mesa : mesas) {
+                ms.actualizarColor(mesa);
+            }
+            ms.moveToFront();
+        }
         try {
             ms.setMaximum(true);
         } catch (PropertyVetoException ex) {
