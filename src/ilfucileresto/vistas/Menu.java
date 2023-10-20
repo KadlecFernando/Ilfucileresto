@@ -110,6 +110,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar4.add(jMenu10);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -233,6 +234,7 @@ public class Menu extends javax.swing.JFrame {
         if (flagProducto == false) {
             pr = new Productos();
             pr.setVisible(true);
+            pr.setTitle("Menu");
             Escritorio.add(pr);
             flagProducto = true;
             try {
@@ -248,7 +250,21 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministracionActionPerformed
-        // TODO add your handling code here:
+        if (flagAdmin == false) {
+            adm = new Administracion();
+            adm.setVisible(true);
+            adm.setTitle("Administracion");
+            Escritorio.add(adm);
+            flagAdmin = true;
+            try {
+                adm.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            adm.moveToFront();
+        }
     }//GEN-LAST:event_btnAdministracionActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -260,6 +276,7 @@ public class Menu extends javax.swing.JFrame {
         if (flagMesas == false) {
             ms = new Mesas();
             ms.setVisible(true);
+            ms.setTitle("Mesas");
             Escritorio.add(ms);
             flagMesas = true;
             try {
@@ -283,6 +300,7 @@ public class Menu extends javax.swing.JFrame {
         if (flagPedido == false) {
             pd = new Pedidos();
             pd.setVisible(true);
+            pd.setTitle("Pedidos");
             Escritorio.add(pd);
             flagPedido = true;
             try {
