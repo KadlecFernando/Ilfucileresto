@@ -5,17 +5,35 @@
  */
 package ilfucileresto.vistas;
 
+import ilfucileresto.AccesoADatos.ProductoData;
+import ilfucileresto.Entidades.Producto;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author mrubio
  */
 public class Productos extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
+
+    private ProductoData pD = new ProductoData();
+
     /**
      * Creates new form Productos
      */
     public Productos() {
         initComponents();
+        cargarColumna();
+        mostrarDatosTabla();
+
     }
 
     /**
@@ -31,12 +49,10 @@ public class Productos extends javax.swing.JInternalFrame {
         btnAgregarProducto = new javax.swing.JButton();
         btnModificarProducto = new javax.swing.JButton();
         btnEliminarProducto = new javax.swing.JButton();
-        txtIdProducto = new javax.swing.JTextField();
         txtNombreProducto = new javax.swing.JTextField();
         txtPrecioUnitario = new javax.swing.JTextField();
         txtStock = new javax.swing.JTextField();
         rbEstado = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -47,7 +63,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbMenu = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1145, 690));
@@ -56,12 +72,27 @@ public class Productos extends javax.swing.JInternalFrame {
 
         btnAgregarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/agregar-producto.png"))); // NOI18N
         btnAgregarProducto.setText("Agregar");
+        btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProductoActionPerformed(evt);
+            }
+        });
 
         btnModificarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/editar-codigo.png"))); // NOI18N
         btnModificarProducto.setText("Modificar");
+        btnModificarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarProductoActionPerformed(evt);
+            }
+        });
 
         btnEliminarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/eliminar-producto.png"))); // NOI18N
         btnEliminarProducto.setText("Eliminar");
+        btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarProductoActionPerformed(evt);
+            }
+        });
 
         rbEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -69,9 +100,6 @@ public class Productos extends javax.swing.JInternalFrame {
                 rbEstadoActionPerformed(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Código:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Descripción:");
@@ -87,9 +115,19 @@ public class Productos extends javax.swing.JInternalFrame {
 
         btnAceptar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnCargaDatosLayout = new javax.swing.GroupLayout(pnCargaDatos);
         pnCargaDatos.setLayout(pnCargaDatosLayout);
@@ -100,7 +138,6 @@ public class Productos extends javax.swing.JInternalFrame {
                 .addGroup(pnCargaDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnCargaDatosLayout.createSequentialGroup()
                         .addGroup(pnCargaDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -109,7 +146,6 @@ public class Productos extends javax.swing.JInternalFrame {
                         .addGroup(pnCargaDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCargaDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnCargaDatosLayout.createSequentialGroup()
@@ -139,11 +175,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addComponent(btnAgregarProducto)
                     .addComponent(btnModificarProducto)
                     .addComponent(btnEliminarProducto))
-                .addGap(18, 18, 18)
-                .addGroup(pnCargaDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(41, 41, 41)
                 .addGroup(pnCargaDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -157,7 +189,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5))
                 .addGap(16, 16, 16)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(pnCargaDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
@@ -194,7 +226,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 153));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -205,7 +237,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(tbMenu);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -244,7 +276,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addComponent(pnCargaDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 115, Short.MAX_VALUE))))
+                        .addGap(0, 121, Short.MAX_VALUE))))
         );
 
         pack();
@@ -254,7 +286,90 @@ public class Productos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbEstadoActionPerformed
 
-   
+    private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
+        btnModificarProducto.setEnabled(false);
+        btnEliminarProducto.setEnabled(false);
+
+
+    }//GEN-LAST:event_btnAgregarProductoActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        if (btnAgregarProducto.isEnabled() && !btnEliminarProducto.isEnabled()) {
+            Producto producto = new Producto();
+            producto.setNombreProducto(txtNombreProducto.getText());
+            producto.setPrecioUnitario(Double.valueOf(txtPrecioUnitario.getText()));
+            producto.setStock(Integer.valueOf(txtStock.getText()));
+            producto.setEstado(rbEstado.isSelected());
+            pD.guardarProducto(producto);
+            btnModificarProducto.setEnabled(true);
+            btnEliminarProducto.setEnabled(true);
+            txtNombreProducto.setText("");
+            txtPrecioUnitario.setText("");
+            txtStock.setText("");
+            rbEstado.setSelected(false);
+            mostrarDatosTabla();
+        } else if (btnModificarProducto.isEnabled() && !btnEliminarProducto.isEnabled()) {
+            Producto producto = new Producto();
+            producto.setIdProducto((Integer) modelo.getValueAt(tbMenu.getSelectedRow(), 0));
+            producto.setNombreProducto(txtNombreProducto.getText());
+            producto.setPrecioUnitario(Double.valueOf(txtPrecioUnitario.getText()));
+            producto.setStock(Integer.valueOf(txtStock.getText()));
+            producto.setEstado(rbEstado.isSelected());
+            pD.modificarProducto(producto);
+            btnAgregarProducto.setEnabled(true);
+            btnEliminarProducto.setEnabled(true);
+            txtNombreProducto.setText("");
+            txtPrecioUnitario.setText("");
+            txtStock.setText("");
+            rbEstado.setSelected(false);
+            mostrarDatosTabla();
+
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProductoActionPerformed
+        if (tbMenu.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto");
+            return;
+        }
+        btnAgregarProducto.setEnabled(false);
+        btnEliminarProducto.setEnabled(false);
+        Integer id = (Integer) modelo.getValueAt(tbMenu.getSelectedRow(), 0);
+        Producto producto = pD.buscarProducto(id);
+        txtNombreProducto.setText(producto.getNombreProducto());
+        txtPrecioUnitario.setText(producto.getPrecioUnitario() + "");
+        txtStock.setText(producto.getStock() + "");
+        rbEstado.setSelected(producto.isEstado());
+    }//GEN-LAST:event_btnModificarProductoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        btnModificarProducto.setEnabled(true);
+        btnEliminarProducto.setEnabled(true);
+        btnAgregarProducto.setEnabled(true);
+        txtNombreProducto.setText("");
+        txtPrecioUnitario.setText("");
+        txtStock.setText("");
+        rbEstado.setSelected(false);
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
+        if (tbMenu.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto");
+            return;
+        }
+        btnAgregarProducto.setEnabled(false);
+        btnModificarProducto.setEnabled(false);
+        Integer id = (Integer) modelo.getValueAt(tbMenu.getSelectedRow(), 0);
+        Producto producto = pD.buscarProducto(id);
+        txtNombreProducto.setText(producto.getNombreProducto());
+        txtPrecioUnitario.setText(producto.getPrecioUnitario() + "");
+        txtStock.setText(producto.getStock() + "");
+        rbEstado.setSelected(producto.isEstado());
+        
+        
+    }//GEN-LAST:event_btnEliminarProductoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
@@ -262,7 +377,6 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JButton btnModificarProducto;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -271,12 +385,41 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     private javax.swing.JPanel pnCargaDatos;
     private javax.swing.JRadioButton rbEstado;
-    private javax.swing.JTextField txtIdProducto;
+    private javax.swing.JTable tbMenu;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecioUnitario;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarColumna() {
+
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("PrecioUnitario");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Estado");
+
+        tbMenu.setModel(modelo);
+
+    }
+
+    private void mostrarDatosTabla() {
+        String estado;
+        List<Producto> productos = pD.listarProductos();
+        modelo.setRowCount(0);
+        for (Producto producto : productos) {
+            if (producto.isEstado()) {
+                estado = "Disponible";
+            } else {
+                estado = "No Disponible";
+            }
+
+            modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getPrecioUnitario(), producto.getStock(), estado});
+
+        }
+
+    }
+
 }

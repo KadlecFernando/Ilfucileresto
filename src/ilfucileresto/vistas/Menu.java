@@ -25,14 +25,22 @@ import javax.swing.plaf.ColorUIResource;
  * @author Loa
  */
 public class Menu extends javax.swing.JFrame {
-    boolean flagMesas=false;
-    Mesas ms = new Mesas();
+
+    boolean flagMesas = false;
+    boolean flagProducto = false;
+    boolean flagPedido = false;
+    boolean flagAdmin = false;
+    Mesas ms;
+    Pedidos pd;
+    Administracion adm;
+    Productos pr;
+
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
-        
+
         //Esto iria en Customize Code
         //UIDefaults ui = UIManager.getDefaults();
         //ui.put("mnuBar.background",new ColorUIResource(Color.BLACK));
@@ -102,7 +110,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar4.add(jMenu10);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -129,6 +136,11 @@ public class Menu extends javax.swing.JFrame {
 
         btnPedidos.setBackground(new java.awt.Color(102, 32, 6));
         btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/comida.png"))); // NOI18N
+        btnPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosActionPerformed(evt);
+            }
+        });
 
         btnMenu.setBackground(new java.awt.Color(102, 32, 6));
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/menu.png"))); // NOI18N
@@ -218,14 +230,21 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        Productos pr = new Productos();
-        pr.setVisible(true);
-        Escritorio.add(pr);
-        try {
-            pr.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        if (flagProducto == false) {
+            pr = new Productos();
+            pr.setVisible(true);
+            Escritorio.add(pr);
+            flagProducto = true;
+            try {
+                pr.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            pr.moveToFront();
         }
+
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministracionActionPerformed
@@ -233,29 +252,49 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdministracionActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasActionPerformed
-        
-        if (flagMesas==false){
+
+        if (flagMesas == false) {
+            ms = new Mesas();
             ms.setVisible(true);
             Escritorio.add(ms);
-            flagMesas=true;
-        }else{
+            flagMesas = true;
+            try {
+                ms.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
             MesaData mD = new MesaData();
-            List <Mesa> mesas = mD.listarMesas();
+            List<Mesa> mesas = mD.listarMesas();
             for (Mesa mesa : mesas) {
                 ms.actualizarColor(mesa);
             }
             ms.moveToFront();
         }
-        try {
-            ms.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }//GEN-LAST:event_btnMesasActionPerformed
+
+    private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
+        if (flagPedido == false) {
+            pd = new Pedidos();
+            pd.setVisible(true);
+            Escritorio.add(pd);
+            flagPedido = true;
+            try {
+                pd.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            pd.moveToFront();
+        }
+    }//GEN-LAST:event_btnPedidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,9 +305,9 @@ public class Menu extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        UIManager.put("nimbusBase", new Color(173,89,42));
-        UIManager.put("control", new Color(224,154,114));
-        
+        UIManager.put("nimbusBase", new Color(173, 89, 42));
+        UIManager.put("control", new Color(224, 154, 114));
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
