@@ -78,7 +78,7 @@ public class MesaData {
             exito = ps.executeUpdate();
             
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
+                //JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
             }
         } catch (SQLException ex) {
             if (exito == 0) {
