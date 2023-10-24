@@ -7,6 +7,7 @@ package ilfucileresto.vistas;
 
 import ilfucileresto.AccesoADatos.ProductoData;
 import ilfucileresto.Entidades.Producto;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -94,6 +95,18 @@ public class Productos extends javax.swing.JInternalFrame {
         btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarProductoActionPerformed(evt);
+            }
+        });
+
+        txtPrecioUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioUnitarioKeyTyped(evt);
+            }
+        });
+
+        txtStock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStockKeyTyped(evt);
             }
         });
 
@@ -225,7 +238,7 @@ public class Productos extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 153));
@@ -269,7 +282,7 @@ public class Productos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1143, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
@@ -309,35 +322,51 @@ public class Productos extends javax.swing.JInternalFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         if (btnAgregarProducto.isEnabled()) {
+            if (txtNombreProducto.getText().isEmpty() || txtPrecioUnitario.getText().isEmpty() || txtStock.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Rellene todos los campos.");
+                return;
+            }
             Producto producto = new Producto();
-            producto.setNombreProducto(txtNombreProducto.getText());
-            producto.setPrecioUnitario(Double.valueOf(txtPrecioUnitario.getText()));
-            producto.setStock(Integer.valueOf(txtStock.getText()));
-            producto.setEstado(true);
-            pD.guardarProducto(producto);
-            txtNombreProducto.setText("");
-            txtPrecioUnitario.setText("");
-            txtStock.setText("");
-            rbEstado.setSelected(false);
-            mostrarDatosTabla();
+            try {
+                producto.setNombreProducto(txtNombreProducto.getText());
+                producto.setPrecioUnitario(Double.valueOf(txtPrecioUnitario.getText()));
+                producto.setStock(Integer.valueOf(txtStock.getText()));
+                producto.setEstado(true);
+                pD.guardarProducto(producto);
+                txtNombreProducto.setText("");
+                txtPrecioUnitario.setText("");
+                txtStock.setText("");
+                rbEstado.setSelected(false);
+                mostrarDatosTabla();
+            } catch (NumberFormatException nf) {
+                JOptionPane.showMessageDialog(this, "Ingrese un Precio válido.");
+            }
 
         } else if (btnModificarProducto.isEnabled()) {
+            if (txtNombreProducto.getText().isEmpty() || txtPrecioUnitario.getText().isEmpty() || txtStock.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Rellene todos los campos.");
+                return;
+            }
             Producto producto = new Producto();
-            producto.setIdProducto((Integer) modelo.getValueAt(tbMenu.getSelectedRow(), 0));
-            producto.setNombreProducto(txtNombreProducto.getText());
-            producto.setPrecioUnitario(Double.valueOf(txtPrecioUnitario.getText()));
-            producto.setStock(Integer.valueOf(txtStock.getText()));
-            producto.setEstado(rbEstado.isSelected());
-            pD.modificarProducto(producto);
-            txtNombreProducto.setText("");
-            txtPrecioUnitario.setText("");
-            txtStock.setText("");
-            rbEstado.setSelected(false);
-            mostrarDatosTabla();
-            
+            try {
+                producto.setIdProducto((Integer) modelo.getValueAt(tbMenu.getSelectedRow(), 0));
+                producto.setNombreProducto(txtNombreProducto.getText());
+                producto.setPrecioUnitario(Double.valueOf(txtPrecioUnitario.getText()));
+                producto.setStock(Integer.valueOf(txtStock.getText()));
+                producto.setEstado(rbEstado.isSelected());
+                pD.modificarProducto(producto);
+                txtNombreProducto.setText("");
+                txtPrecioUnitario.setText("");
+                txtStock.setText("");
+                rbEstado.setSelected(false);
+                mostrarDatosTabla();
+            } catch (NumberFormatException nf) {
+                JOptionPane.showMessageDialog(this, "Ingrese un Precio válido.");
+            }
+
         } else if (btnEliminarProducto.isEnabled()) {
-            int resp = JOptionPane.showConfirmDialog(this,"¿Desea eliminar el producto?","Eliminar Producto",JOptionPane.YES_NO_OPTION);
-            if (resp == JOptionPane.YES_OPTION){
+            int resp = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el producto?", "Eliminar Producto", JOptionPane.YES_NO_OPTION);
+            if (resp == JOptionPane.YES_OPTION) {
                 Producto producto = new Producto();
                 producto.setIdProducto((Integer) modelo.getValueAt(tbMenu.getSelectedRow(), 0));
                 producto.setNombreProducto(txtNombreProducto.getText());
@@ -352,7 +381,7 @@ public class Productos extends javax.swing.JInternalFrame {
                 mostrarDatosTabla();
             }
         }
-        
+
         btnEliminarProducto.setEnabled(true);
         btnAgregarProducto.setEnabled(true);
         btnModificarProducto.setEnabled(true);
@@ -363,7 +392,6 @@ public class Productos extends javax.swing.JInternalFrame {
 
     private void btnModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProductoActionPerformed
 
-        
         if (tbMenu.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(this, "Seleccione un producto");
             return;
@@ -372,6 +400,7 @@ public class Productos extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(true);
         btnAgregarProducto.setEnabled(false);
         btnEliminarProducto.setEnabled(false);
+        rbEstado.setSelected(true);
         rbEstado.setEnabled(false);
         Integer id = (Integer) modelo.getValueAt(tbMenu.getSelectedRow(), 0);
         Producto producto = pD.buscarProducto(id);
@@ -394,7 +423,7 @@ public class Productos extends javax.swing.JInternalFrame {
         btnAceptar.setEnabled(false);
         btnCancelar.setEnabled(false);
         deshabilitarTexts();
-        
+
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
@@ -415,8 +444,8 @@ public class Productos extends javax.swing.JInternalFrame {
         txtNombreProducto.setText(producto.getNombreProducto());
         txtPrecioUnitario.setText(producto.getPrecioUnitario() + "");
         txtStock.setText(producto.getStock() + "");
-        
-        
+
+
     }//GEN-LAST:event_btnEliminarProductoActionPerformed
 
     private void rbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbEstadoActionPerformed
@@ -428,8 +457,8 @@ public class Productos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un producto");
             return;
         }
-        
-        if (btnAgregarProducto.isEnabled() && !btnModificarProducto.isEnabled()){
+
+        if (btnAgregarProducto.isEnabled() && !btnModificarProducto.isEnabled()) {
             return;
         }
 
@@ -438,8 +467,23 @@ public class Productos extends javax.swing.JInternalFrame {
         txtNombreProducto.setText(producto.getNombreProducto());
         txtPrecioUnitario.setText(producto.getPrecioUnitario() + "");
         txtStock.setText(producto.getStock() + "");
-        
+
+
     }//GEN-LAST:event_tbMenuMouseClicked
+
+    private void txtPrecioUnitarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioUnitarioKeyTyped
+        char caracter = evt.getKeyChar();
+        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == '.') || (caracter == KeyEvent.VK_DELETE)))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioUnitarioKeyTyped
+
+    private void txtStockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockKeyTyped
+        char caracter = evt.getKeyChar();
+        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == KeyEvent.VK_DELETE)))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtStockKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -492,19 +536,17 @@ public class Productos extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    private void deshabilitarTexts(){
+
+    private void deshabilitarTexts() {
         txtNombreProducto.setEnabled(false);
         txtPrecioUnitario.setEnabled(false);
         txtStock.setEnabled(false);
     }
-    
-    private void habilitarTexts(){
+
+    private void habilitarTexts() {
         txtNombreProducto.setEnabled(true);
         txtPrecioUnitario.setEnabled(true);
         txtStock.setEnabled(true);
     }
-    
-    
 
 }
