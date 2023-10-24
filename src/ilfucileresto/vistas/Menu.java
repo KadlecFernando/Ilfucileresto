@@ -287,7 +287,7 @@ public class Menu extends javax.swing.JFrame {
 
         } else {
             MesaData mD = new MesaData();
-            List<Mesa> mesas = mD.listarMesas();
+            List<Mesa> mesas = mD.listarMesas(false);
             for (Mesa mesa : mesas) {
                 ms.actualizarColor(mesa);
             }

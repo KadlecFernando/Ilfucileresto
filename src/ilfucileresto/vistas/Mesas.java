@@ -115,7 +115,7 @@ public class Mesas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        mesas = mD.listarMesas();
+        mesas = mD.listarMesas(false);
             for (Mesa mesa : mesas) {
                 actualizarColor(mesa);
             }
@@ -138,7 +138,7 @@ public class Mesas extends javax.swing.JInternalFrame {
         int contador = 0;
         int altoPlus = pnMesas.getHeight();
 
-        mesas = mD.listarMesas();
+        mesas = mD.listarMesas(false);
 
         for (Mesa mesa : mesas) {
             JButton boton = new JButton();

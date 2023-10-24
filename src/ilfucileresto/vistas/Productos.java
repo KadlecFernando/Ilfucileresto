@@ -160,18 +160,17 @@ public class Productos extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(pnCargaDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnCargaDatosLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(pnCargaDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCargaDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pnCargaDatosLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCargaDatosLayout.createSequentialGroup()
                                 .addComponent(rbEstado)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(229, 229, 229))))
                     .addGroup(pnCargaDatosLayout.createSequentialGroup()
                         .addComponent(btnAgregarProducto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -238,7 +237,7 @@ public class Productos extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel8)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 153));
@@ -282,7 +281,7 @@ public class Productos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1143, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
@@ -340,6 +339,9 @@ public class Productos extends javax.swing.JInternalFrame {
                 mostrarDatosTabla();
             } catch (NumberFormatException nf) {
                 JOptionPane.showMessageDialog(this, "Ingrese un Precio válido.");
+                txtPrecioUnitario.setText("");
+                txtPrecioUnitario.setFocusable(true);
+                return;
             }
 
         } else if (btnModificarProducto.isEnabled()) {
@@ -362,6 +364,9 @@ public class Productos extends javax.swing.JInternalFrame {
                 mostrarDatosTabla();
             } catch (NumberFormatException nf) {
                 JOptionPane.showMessageDialog(this, "Ingrese un Precio válido.");
+                txtPrecioUnitario.setText("");
+                txtPrecioUnitario.setFocusable(true);
+                return;
             }
 
         } else if (btnEliminarProducto.isEnabled()) {

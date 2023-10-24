@@ -89,10 +89,17 @@ public class MesaData {
         }
     }
     
-     public List<Mesa> listarMesas() {
+    public List<Mesa> listarMesas(boolean filtroEstado) {
         List<Mesa> mesas = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM mesa";
+            String sql="";
+            
+            if (filtroEstado){
+                sql = "SELECT * FROM mesa WHERE estadoMesa = 1";  
+            }else{
+                sql = "SELECT * FROM mesa";
+            }
+            
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
