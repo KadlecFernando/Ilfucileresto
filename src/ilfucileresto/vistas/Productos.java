@@ -241,6 +241,11 @@ public class Productos extends javax.swing.JInternalFrame {
 
             }
         ));
+        tbMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbMenuMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tbMenu);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -418,6 +423,24 @@ public class Productos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbEstadoActionPerformed
 
+    private void tbMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMenuMouseClicked
+        if (tbMenu.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto");
+            return;
+        }
+        
+        if (btnAgregarProducto.isEnabled() && !btnModificarProducto.isEnabled()){
+            return;
+        }
+
+        Integer id = (Integer) modelo.getValueAt(tbMenu.getSelectedRow(), 0);
+        Producto producto = pD.buscarProducto(id);
+        txtNombreProducto.setText(producto.getNombreProducto());
+        txtPrecioUnitario.setText(producto.getPrecioUnitario() + "");
+        txtStock.setText(producto.getStock() + "");
+        
+    }//GEN-LAST:event_tbMenuMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
@@ -425,14 +448,11 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JButton btnModificarProducto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
