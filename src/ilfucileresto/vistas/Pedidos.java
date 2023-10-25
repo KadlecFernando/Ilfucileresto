@@ -160,6 +160,16 @@ public class Pedidos extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tbProductos);
 
+        cboMozo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                cboMozoPopupMenuWillBecomeVisible(evt);
+            }
+        });
+
         cboMesas.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 cboMesasFocusGained(evt);
@@ -557,7 +567,9 @@ public class Pedidos extends javax.swing.JInternalFrame {
         }
         pD.modificarProducto(seleccionado);
         mostrarDatosTablaProductos();
-        tbProductos.setRowSelectionInterval(fila, fila);
+        if (fila < tbProductos.getRowCount()) {
+            tbProductos.setRowSelectionInterval(fila, fila);
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void cboMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMesasActionPerformed
@@ -645,6 +657,10 @@ public class Pedidos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cboMozosPopupMenuWillBecomeVisible
 
+    private void cboMozoPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMozoPopupMenuWillBecomeVisible
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboMozoPopupMenuWillBecomeVisible
+
     public void cargarColumnasProductos() {
 
         modelo.addColumn("Codigo");
@@ -663,7 +679,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         tbPedido.setModel(modeloVacio);
     }
 
-    private void mostrarDatosTablaProductos() {
+    public void mostrarDatosTablaProductos() {
         String estado;
         List<Producto> productos = pD.listarProductos();
         modelo.setRowCount(0);
@@ -699,8 +715,6 @@ public class Pedidos extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

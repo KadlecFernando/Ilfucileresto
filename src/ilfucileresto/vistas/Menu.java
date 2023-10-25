@@ -311,6 +311,7 @@ public class Menu extends javax.swing.JFrame {
 
         } else {
             pd.moveToFront();
+            pd.mostrarDatosTablaProductos();
         }
     }//GEN-LAST:event_btnPedidosActionPerformed
 
