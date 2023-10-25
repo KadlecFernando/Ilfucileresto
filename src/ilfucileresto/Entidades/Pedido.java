@@ -93,11 +93,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return idPedido + ",  Mesa: + "+mesa.getIdMesa()+" Empleado: "+ empleado.getNombre() + " " + fechaHora +" $" + importe;
+        return "Pedido: " + idPedido;
     }
-    
-    
-    
-     
-    
+
 }

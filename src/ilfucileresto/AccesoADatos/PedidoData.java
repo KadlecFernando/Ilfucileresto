@@ -158,6 +158,27 @@ public class PedidoData {
         return pedidos;
     }
 
+    public List<Pedido> listarPedidosPorMeseroMesa(Empleado mesero, Mesa mesa) {
+
+        //Ver parametro opcional para fecha...
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            String sql = "SELECT idPedido FROM pedido WHERE idEmpleado = ? AND idMesa=? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, mesero.getIdEmpleado());
+            ps.setInt(2, mesa.getIdMesa());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pedido pedido = this.buscarPedido(rs.getInt("idPedido"));
+                pedidos.add(pedido);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido." + ex.getMessage());
+        }
+        return pedidos;
+    }
+
     public List<Pedido> listarPedidosPorMesaPorHora(Mesa mesa, LocalDate dia, LocalTime horaDesde, LocalTime horaHasta) {
         List<Pedido> pedidos = new ArrayList<>();
 
@@ -181,7 +202,7 @@ public class PedidoData {
     }
 
     public double calcularIngresosPorFecha(LocalDate fecha) {
-        double total=-1;
+        double total = -1;
         try {
             String sql = "SELECT sum(importe) as total FROM pedido WHERE DATE(fechaHora) = ?";
             PreparedStatement ps = con.prepareStatement(sql);
