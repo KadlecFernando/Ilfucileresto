@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.UIDefaults;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -120,6 +121,9 @@ public class Pedidos extends javax.swing.JInternalFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        UIDefaults color=new UIDefaults();
+        color.put("TabbedPane:TabbedPaneTab[Enabled].textForeground",new Color(127,63,190));
+        Solapas.putClientProperty("Nimbus.Overrides", color);
         Solapas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         pnAgregarPedido.setForeground(new java.awt.Color(51, 51, 255));
@@ -149,6 +153,11 @@ public class Pedidos extends javax.swing.JInternalFrame {
 
             }
         ));
+        tbProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbProductosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbProductos);
 
         cboMesas.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -205,12 +214,24 @@ public class Pedidos extends javax.swing.JInternalFrame {
 
         btnAgregar.setFocusPainted(false);
         btnAgregar.setOpaque(false);
-        btnAgregar.setBorderPainted(false);
+        //btnAgregar.setBorderPainted(false);
         btnAgregar.setContentAreaFilled(false);
         btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregar.setBackground(new Color(173, 89, 42,200));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/flechas-a-la-derecha-verde.png"))); // NOI18N
-        btnAgregar.setBorder(null);
+        btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAgregar.setBorderPainted(false);
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAgregarMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAgregarMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnAgregarMouseReleased(evt);
+            }
+        });
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -224,6 +245,14 @@ public class Pedidos extends javax.swing.JInternalFrame {
         btnDescartar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDescartar.setBackground(new java.awt.Color(224, 154, 114));
         btnDescartar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/flechas-izquierda.png"))); // NOI18N
+        btnDescartar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnDescartarMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnDescartarMouseReleased(evt);
+            }
+        });
         btnDescartar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDescartarActionPerformed(evt);
@@ -235,7 +264,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         pnAgregarPedidoLayout.setHorizontalGroup(
             pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
-                .addContainerGap(527, Short.MAX_VALUE)
+                .addContainerGap(525, Short.MAX_VALUE)
                 .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDescartar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -398,27 +427,36 @@ public class Pedidos extends javax.swing.JInternalFrame {
             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
         );
 
-        cboMozos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboMozos.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                cboMozosPopupMenuWillBecomeVisible(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboMozos, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(169, 169, 169))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(169, 169, 169)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cboMozos, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(169, 169, 169))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -470,7 +508,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        if (cboMozo.getSelectedItem()==null || cboMesas.getSelectedItem()==null || tbPedido.getRowCount()<0){
+        if (cboMozo.getSelectedItem() == null || cboMesas.getSelectedItem() == null || tbPedido.getRowCount() < 0) {
             JOptionPane.showMessageDialog(this, "Debe completar todos los datos.");
             return;
         }
@@ -482,8 +520,8 @@ public class Pedidos extends javax.swing.JInternalFrame {
 
             for (int i = 0; i < tbPedido.getRowCount(); i++) {
                 Integer codigo = (Integer) modeloVacio.getValueAt(i, 0);
-                String descripcion = (String) modeloVacio.getValueAt(i,1);
-                Double precioUnitario = (Double) modeloVacio.getValueAt(i,2);
+                String descripcion = (String) modeloVacio.getValueAt(i, 1);
+                Double precioUnitario = (Double) modeloVacio.getValueAt(i, 2);
 
                 Producto seleccionado = pD.buscarProducto(codigo);
 
@@ -492,11 +530,11 @@ public class Pedidos extends javax.swing.JInternalFrame {
                     seleccionado.setEstado(true);
                 }
                 pD.modificarProducto(seleccionado);
-                
+
             }
             modeloVacio.setRowCount(0);
             mostrarDatosTablaProductos();
-            
+
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -505,6 +543,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un producto.");
             return;
         }
+        int fila = tbProductos.getSelectedRow();
         Integer codigo = (Integer) modelo.getValueAt(tbProductos.getSelectedRow(), 0);
         String descripcion = (String) modelo.getValueAt(tbProductos.getSelectedRow(), 1);
         Double precioUnitario = (Double) modelo.getValueAt(tbProductos.getSelectedRow(), 2);
@@ -518,6 +557,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         }
         pD.modificarProducto(seleccionado);
         mostrarDatosTablaProductos();
+        tbProductos.setRowSelectionInterval(fila, fila);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void cboMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMesasActionPerformed
@@ -530,15 +570,18 @@ public class Pedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboMesasMouseClicked
 
     private void cboMesasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboMesasFocusGained
-        Object seleccionada = cboMesas.getSelectedItem();
-        cargarComboMesas();
-        cboMesas.setSelectedItem(seleccionada);
-        cboMesas.updateUI();
+//        Object seleccionada = cboMesas.getSelectedItem();
+//        cargarComboMesas();
+//        cboMesas.setSelectedItem(seleccionada);
+//        cboMesas.updateUI();
 
     }//GEN-LAST:event_cboMesasFocusGained
 
     private void cboMesasPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMesasPopupMenuWillBecomeVisible
-        // TODO add your handling code here:
+        Mesa seleccionada = (Mesa) cboMesas.getSelectedItem();
+        cargarComboMesas();
+        cboMesas.setSelectedItem(seleccionada);
+
     }//GEN-LAST:event_cboMesasPopupMenuWillBecomeVisible
 
     private void cboMesasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cboMesasPropertyChange
@@ -564,6 +607,43 @@ public class Pedidos extends javax.swing.JInternalFrame {
         pD.modificarProducto(seleccionado);
         mostrarDatosTablaProductos();
     }//GEN-LAST:event_btnDescartarActionPerformed
+
+    private void btnAgregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMousePressed
+        btnAgregar.setContentAreaFilled(true);
+        btnAgregar.setBackground(new Color(129, 239, 108));
+    }//GEN-LAST:event_btnAgregarMousePressed
+
+    private void btnAgregarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseExited
+
+    }//GEN-LAST:event_btnAgregarMouseExited
+
+    private void btnDescartarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescartarMousePressed
+        btnDescartar.setContentAreaFilled(true);
+        btnDescartar.setBackground(new Color(254, 89, 68));
+    }//GEN-LAST:event_btnDescartarMousePressed
+
+    private void btnAgregarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseReleased
+        btnAgregar.setContentAreaFilled(false);
+        btnAgregar.setBackground(new Color(173, 89, 42, 200));
+    }//GEN-LAST:event_btnAgregarMouseReleased
+
+    private void btnDescartarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescartarMouseReleased
+        btnDescartar.setContentAreaFilled(false);
+        btnDescartar.setBackground(new Color(173, 89, 42, 200));
+    }//GEN-LAST:event_btnDescartarMouseReleased
+
+    private void tbProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbProductosMouseClicked
+
+    private void cboMozosPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMozosPopupMenuWillBecomeVisible
+        cboMozos.removeAllItems();
+        List<Empleado> empleados = eD.listarEmpleados();
+        cboMozos.addItem(null);
+        for (Empleado e : empleados) {
+            cboMozos.addItem(e);
+        }
+    }//GEN-LAST:event_cboMozosPopupMenuWillBecomeVisible
 
     public void cargarColumnasProductos() {
 
@@ -619,6 +699,8 @@ public class Pedidos extends javax.swing.JInternalFrame {
         }
 
     }
+    
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -629,7 +711,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDescartar;
     private javax.swing.JComboBox<Mesa> cboMesas;
     private javax.swing.JComboBox<Empleado> cboMozo;
-    private javax.swing.JComboBox<String> cboMozos;
+    private javax.swing.JComboBox<Empleado> cboMozos;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
