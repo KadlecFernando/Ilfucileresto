@@ -43,7 +43,7 @@ public class DetallePedidoData {
         }
     }
 
-    public List<DetallePedido> listarDetallePedidos(int x) {
+    public List<DetallePedido> listarDetallePedidosPorEmpleado(int idEmpleado) {
         List<DetallePedido> detallesPedidos = new ArrayList<>();
         try {
             String sql = "Select detallePedido.* from detallepedido\n"
@@ -52,7 +52,62 @@ public class DetallePedidoData {
                     + "WHERE pedido.idEmpleado=?\n"
                     + "order by detallepedido.idPedido desc;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, x);
+            ps.setInt(1, idEmpleado);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                DetallePedido dp = new DetallePedido();
+                Producto pr = prD.buscarProducto(rs.getInt("idProducto"));
+                Pedido ped = peD.buscarPedido(rs.getInt("idPedido"));
+                dp.setPedido(ped);
+                dp.setProducto(pr);
+                dp.setCantidad(rs.getInt("Cantidad"));
+                detallesPedidos.add(dp);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DetallePedidoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return detallesPedidos;
+    }
+
+    public List<DetallePedido> listarDetallePedidosPorEmpleadoPreciosHora(int idEmpleado) {
+        List<DetallePedido> detallesPedidos = new ArrayList<>();
+        try {
+            String sql = "Select detallePedido.* from detallepedido\n"
+                    + "JOIN pedido\n"
+                    + "ON detallepedido.idPedido=pedido.idPedido\n"
+                    + "WHERE pedido.idEmpleado=?\n"
+                    + "GROUP BY detallepedido.idPedido  \n"
+                    + "ORDER BY `detallepedido`.`idPedido` DESC;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idEmpleado);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                DetallePedido dp = new DetallePedido();
+                Pedido ped = peD.buscarPedido(rs.getInt("idPedido"));
+                dp.setPedido(ped);
+                Producto pr = prD.buscarProducto(rs.getInt("idProducto"));
+                dp.setProducto(pr);
+                dp.setCantidad(rs.getInt("Cantidad"));
+                detallesPedidos.add(dp);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DetallePedidoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return detallesPedidos;
+    }
+
+    public List<DetallePedido> listarDetallePedidosPorId(int idPedido) {
+        List<DetallePedido> detallesPedidos = new ArrayList<>();
+        try {
+            String sql = "Select detallePedido.* from detallepedido\n"
+                    + "JOIN pedido\n"
+                    + "ON detallepedido.idPedido=pedido.idPedido\n"
+                    + "WHERE pedido.idPedido=?\n"
+                    + "order by detallepedido.idPedido desc;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idPedido);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 DetallePedido dp = new DetallePedido();

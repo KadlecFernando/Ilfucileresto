@@ -1,6 +1,9 @@
 package ilfucileresto.Entidades;
 // El Sebas: El rockanroll no morirá jamás ♡♡♡♡♡♡♡ 
 
+import java.util.Objects;
+
+
 public class Empleado {
 
     private int idEmpleado;
@@ -106,6 +109,61 @@ public class Empleado {
         this.estado = estado;
     } 
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + this.idEmpleado;
+        hash = 67 * hash + Objects.hashCode(this.apellido);
+        hash = 67 * hash + Objects.hashCode(this.nombre);
+        hash = 67 * hash + Objects.hashCode(this.DNI);
+        hash = 67 * hash + Objects.hashCode(this.puesto);
+        hash = 67 * hash + Objects.hashCode(this.user);
+        hash = 67 * hash + Objects.hashCode(this.password);
+        hash = 67 * hash + (this.estado ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Empleado other = (Empleado) obj;
+        if (this.idEmpleado != other.idEmpleado) {
+            return false;
+        }
+        if (this.estado != other.estado) {
+            return false;
+        }
+        if (!Objects.equals(this.apellido, other.apellido)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.DNI, other.DNI)) {
+            return false;
+        }
+        if (!Objects.equals(this.puesto, other.puesto)) {
+            return false;
+        }
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
     @Override
     public String toString() {
         return idEmpleado + " - " + apellido + " " + nombre + " - " + DNI;

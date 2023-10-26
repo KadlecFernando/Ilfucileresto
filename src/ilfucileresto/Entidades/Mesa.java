@@ -51,10 +51,10 @@ public class Mesa {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + this.idMesa;
-        hash = 79 * hash + this.estadoMesa;
-        hash = 79 * hash + this.capacidad;
+        int hash = 5;
+        hash = 71 * hash + this.idMesa;
+        hash = 71 * hash + this.estadoMesa;
+        hash = 71 * hash + this.capacidad;
         return hash;
     }
 
@@ -81,7 +81,4 @@ public class Mesa {
         }
         return true;
     }
-    
-    
-
 }
