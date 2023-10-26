@@ -5,10 +5,14 @@
  */
 package ilfucileresto.vistas;
 
+import ilfucileresto.AccesoADatos.EmpleadoData;
+import ilfucileresto.Entidades.Empleado;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -17,12 +21,14 @@ import javax.swing.JPanel;
  */
 public class Login extends javax.swing.JFrame {
 
+    EmpleadoData eD = new EmpleadoData();
+
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
-        
+
         //Esto iria en Customize Code
         //txtUsuario.setOpaque(false);
         //txtUsuario.setBackground(new Color(255,255,255,50));
@@ -63,9 +69,22 @@ public class Login extends javax.swing.JFrame {
         txtUsuario.setText("Usuario");
         txtUsuario.setOpaque(false);
         txtUsuario.setBackground(new Color(255,255,255,80));
+        txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUsuarioMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtUsuarioMousePressed(evt);
+            }
+        });
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
+            }
+        });
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
             }
         });
 
@@ -75,9 +94,22 @@ public class Login extends javax.swing.JFrame {
         txtContrasenia.setOpaque(false);
         txtContrasenia.setBackground(new Color(255,255,255,80));
         txtContrasenia.setForeground(new java.awt.Color(51, 51, 51));
+        txtContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtContraseniaMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtContraseniaMousePressed(evt);
+            }
+        });
         txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContraseniaActionPerformed(evt);
+            }
+        });
+        txtContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraseniaKeyTyped(evt);
             }
         });
 
@@ -124,16 +156,82 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        // TODO add your handling code here:
+        Empleado e = new Empleado();
+        String usuario = txtUsuario.getText();
+        String contrasenia = txtContrasenia.getText();
+
+        if (usuario.isEmpty() || contrasenia.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Complete todos los campos.");
+            return;
+        }
+        e = eD.buscarEmpleadoPorUser(usuario, contrasenia);
+
+        if (e == null) {
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Inténtelo nuevamente.");
+            return;
+        }
+
+        if (e != null) {
+            if (usuario.equals(contrasenia)) {
+                LoginContrasenia lg = new LoginContrasenia();
+                lg.setVisible(true);
+                lg.setLocationRelativeTo(this);
+                lg.contra = contrasenia;
+                lg.e = e;
+            } else {
+                Menu mnu = new Menu();
+                mnu.setVisible(true);
+                mnu.setLocationRelativeTo(null);
+                mnu.usuario = e.getPuesto();
+                mnu.seguridadUsuario();
+
+            }
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtContraseniaActionPerformed
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        char caracter = evt.getKeyChar();
+        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == '.') || (caracter == KeyEvent.VK_DELETE)
+                || (caracter >= 'A') && (caracter <= 'Z') || (caracter >= 'a') && (caracter <= 'z')))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void txtContraseniaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseniaKeyTyped
+        char caracter = evt.getKeyChar();
+        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == '.') || (caracter == KeyEvent.VK_DELETE)
+                || (caracter >= 'A') && (caracter <= 'Z') || (caracter >= 'a') && (caracter <= 'z')))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtContraseniaKeyTyped
+
+    private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
+        if ("Usuario".equals(txtUsuario.getText())) {
+            txtUsuario.setText("");
+        }
+    }//GEN-LAST:event_txtUsuarioMouseClicked
+
+    private void txtUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMousePressed
+
+    }//GEN-LAST:event_txtUsuarioMousePressed
+
+    private void txtContraseniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseniaMousePressed
+
+    }//GEN-LAST:event_txtContraseniaMousePressed
+
+    private void txtContraseniaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseniaMouseClicked
+        if ("Contraseña".equals(txtContrasenia.getText())) {
+            txtContrasenia.setText("");
+        }
+    }//GEN-LAST:event_txtContraseniaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -169,7 +267,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-    
+
     class FondoPanel extends JPanel {
 
         private Image imagen;
@@ -185,6 +283,7 @@ public class Login extends javax.swing.JFrame {
             super.paint(g);
         }
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
