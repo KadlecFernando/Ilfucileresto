@@ -9,8 +9,10 @@ import ilfucileresto.AccesoADatos.EmpleadoData;
 import ilfucileresto.AccesoADatos.MesaData;
 import ilfucileresto.Entidades.Empleado;
 import ilfucileresto.Entidades.Mesa;
+import java.awt.Dialog;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -60,6 +62,7 @@ public class Administracion extends javax.swing.JInternalFrame {
         txtContraseña = new javax.swing.JTextField();
         cboPuesto = new javax.swing.JComboBox<>();
         btnAgregarMesa1 = new javax.swing.JButton();
+        btnModificarMesa1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -173,6 +176,14 @@ public class Administracion extends javax.swing.JInternalFrame {
             }
         });
 
+        btnModificarMesa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ilfucileresto/Imagenes/editar-codigo.png"))); // NOI18N
+        btnModificarMesa1.setText("Modificar");
+        btnModificarMesa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarMesa1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -204,7 +215,9 @@ public class Administracion extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(btnAgregarMesa1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnModificarMesa1)
+                .addGap(100, 100, 100))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,7 +251,9 @@ public class Administracion extends javax.swing.JInternalFrame {
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
-                .addComponent(btnAgregarMesa1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarMesa1)
+                    .addComponent(btnModificarMesa1))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
@@ -523,11 +538,19 @@ public class Administracion extends javax.swing.JInternalFrame {
         txtContraseña.setText(txtDNI.getText());
     }//GEN-LAST:event_txtDNIFocusLost
 
+    private void btnModificarMesa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMesa1ActionPerformed
+       ModificarEmpleado mE = new ModificarEmpleado();
+       mE.setVisible(true);
+       mE.setLocationRelativeTo(null); 
+        
+    }//GEN-LAST:event_btnModificarMesa1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarMesa;
     private javax.swing.JButton btnAgregarMesa1;
     private javax.swing.JButton btnModificarMesa;
+    private javax.swing.JButton btnModificarMesa1;
     private javax.swing.JComboBox<Mesa> cboListaMesas;
     private javax.swing.JComboBox<String> cboPuesto;
     private javax.swing.JLabel jLabel10;
