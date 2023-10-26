@@ -14,8 +14,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -594,12 +596,30 @@ public class Pedidos extends javax.swing.JInternalFrame {
             return;
         }
         Pedido p = new Pedido();
+        DetallePedido dp = new DetallePedido();
         Empleado e = (Empleado) cboMozo.getSelectedItem();
         Mesa m = (Mesa) cboMesas.getSelectedItem();
         p.setEmpleado(e);
         p.setMesa(m);
         p.setFechaHora(LocalDateTime.now());
-        p.setImporte(ABORT);
+        p.setPago(false);
+        p.setEstado(1);
+        dp.setPedido(p);
+        peD.guardarPedido(p);
+        Map<Integer, Integer> conteoProductos = new HashMap<>();
+        for (int fila = 0; fila < modeloVacio.getRowCount(); fila++) {
+            Integer producto = (Integer)modeloVacio.getValueAt(fila, 0);
+            conteoProductos.put(producto, conteoProductos.getOrDefault(producto, 0) + 1);
+        }
+        for (Map.Entry<Integer, Integer> entry : conteoProductos.entrySet()) {
+            int key = Integer.valueOf(entry.getKey());
+            Producto pro=pD.buscarProducto(key);
+            Integer value = entry.getValue();
+            dpD.agregarDetallePedido(p, pro, value);
+        }
+        cboMesas.setSelectedIndex(0);
+        cboMozo.setSelectedIndex(0);
+        modeloVacio.setRowCount(0);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

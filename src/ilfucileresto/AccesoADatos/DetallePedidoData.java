@@ -35,7 +35,6 @@ public class DetallePedidoData {
             ps.setInt(3, cant);
             int fila = ps.executeUpdate();
             if (fila > 0) {
-                JOptionPane.showMessageDialog(null, "El detalle del pedido se agregó con éxito");
             }
             ps.close();
         } catch (SQLException ex) {
