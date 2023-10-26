@@ -606,17 +606,21 @@ public class Pedidos extends javax.swing.JInternalFrame {
         p.setEstado(1);
         dp.setPedido(p);
         peD.guardarPedido(p);
+
         Map<Integer, Integer> conteoProductos = new HashMap<>();
         for (int fila = 0; fila < modeloVacio.getRowCount(); fila++) {
-            Integer producto = (Integer)modeloVacio.getValueAt(fila, 0);
+            Integer producto = (Integer) modeloVacio.getValueAt(fila, 0);
             conteoProductos.put(producto, conteoProductos.getOrDefault(producto, 0) + 1);
         }
         for (Map.Entry<Integer, Integer> entry : conteoProductos.entrySet()) {
             int key = Integer.valueOf(entry.getKey());
-            Producto pro=pD.buscarProducto(key);
+            Producto pro = pD.buscarProducto(key);
             Integer value = entry.getValue();
             dpD.agregarDetallePedido(p, pro, value);
         }
+        double total = dpD.calcularTotal(p);
+        p.setImporte(total);
+        peD.modificarPedido(p);
         cboMesas.setSelectedIndex(0);
         cboMozo.setSelectedIndex(0);
         modeloVacio.setRowCount(0);
@@ -793,7 +797,8 @@ public class Pedidos extends javax.swing.JInternalFrame {
             Set<DetallePedido> setDP = new HashSet<>(dp);
             modeloDetalle.setRowCount(0);
             for (DetallePedido d : setDP) {
-                modeloDetalle.addRow(new Object[]{d.getPedido().getIdPedido(), d.getProducto().getNombreProducto(), d.getCantidad()});
+                double sub = dpD.calcularSubtotal(d.getProducto(), d.getCantidad());
+                modeloDetalle.addRow(new Object[]{d.getPedido().getIdPedido(), d.getProducto().getNombreProducto(), d.getCantidad(), sub});
             }
             Pedido p = peD.buscarPedido(x);
             jtTotal.setText(dpD.calcularTotal(p) + "");
@@ -819,6 +824,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         modeloDetalle.addColumn("IdPedido");
         modeloDetalle.addColumn("Producto");
         modeloDetalle.addColumn("Cantidad");
+        modeloDetalle.addColumn("Subtotal");
         tablaDetalle.setModel(modeloDetalle);
     }
 
