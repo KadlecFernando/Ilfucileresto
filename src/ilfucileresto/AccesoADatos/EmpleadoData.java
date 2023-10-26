@@ -157,7 +157,7 @@ public class EmpleadoData {
                 empleado.setEstado(rs.getBoolean("estado"));
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el empleado.");
+                //JOptionPane.showMessageDialog(null, "No existe el empleado.");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -173,7 +173,7 @@ public class EmpleadoData {
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, empleado.getPassword());
-            ps.setInt(3, empleado.getIdEmpleado());
+            ps.setInt(2, empleado.getIdEmpleado());
             exito = ps.executeUpdate();
 
             if (exito == 1) {
