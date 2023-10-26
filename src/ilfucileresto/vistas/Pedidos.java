@@ -740,12 +740,11 @@ public class Pedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbProductosMouseClicked
 
     private void cboMozosPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMozosPopupMenuWillBecomeVisible
+        Empleado emp = (Empleado) cboMozos.getSelectedItem();
         cboMozos.removeAllItems();
         List<Empleado> empleados = eD.listarEmpleados();
-        cboMozos.addItem(null);
-        for (Empleado e : empleados) {
-            cboMozos.addItem(e);
-        }
+        cargarComboMozos(cboMozos);
+        cboMozos.setSelectedItem(emp);
     }//GEN-LAST:event_cboMozosPopupMenuWillBecomeVisible
 
     private void cboMozoPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMozoPopupMenuWillBecomeVisible
@@ -771,6 +770,8 @@ public class Pedidos extends javax.swing.JInternalFrame {
                 modeloDetallePedido.addRow(new Object[]{d.getPedido().getIdPedido(), d.getPedido().getMesa().getIdMesa(),
                     fecha, pago});
             }
+        } else {
+            modeloDetallePedido.setRowCount(0);
         }
     }//GEN-LAST:event_cboMozosItemStateChanged
 
@@ -798,7 +799,9 @@ public class Pedidos extends javax.swing.JInternalFrame {
 
         int e = (Integer) tablaDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
         Pedido p = peD.buscarPedido(e);
-        cboMozo.setSelectedItem(p.getEmpleado());
+        int idEmpleado = p.getEmpleado().getIdEmpleado();
+        Empleado mozo = eD.buscarEmpleado(idEmpleado);
+        cboMozo.setSelectedItem(mozo);
         cboMesas.setSelectedItem(p.getMesa());
         List<DetallePedido> dp = dpD.listarDetallePedidosPorId(e);
         modeloVacio.setRowCount(0);
@@ -871,11 +874,11 @@ public class Pedidos extends javax.swing.JInternalFrame {
         List<Empleado> empleados = eD.listarEmpleados();
         cbo.addItem(null);
         for (Empleado mozo : empleados) {
-            cbo.addItem(mozo);
+            if (mozo.getPuesto().equals("MESERO")) {
+                cbo.addItem(mozo);
+            }
         }
-    }
 
-    private void cargarComboPedidos() {
     }
 
 
