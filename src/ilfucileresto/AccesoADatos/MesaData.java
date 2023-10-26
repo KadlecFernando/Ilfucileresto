@@ -115,4 +115,25 @@ public class MesaData {
         }
         return mesas;
     }
+    
+    public List<Mesa> listarMesasDesc() {
+        List<Mesa> mesas = new ArrayList<>();
+        try {
+            String sql="SELECT * FROM mesa ORDER BY idMesa DESC";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Mesa mesa = new Mesa();
+                mesa.setIdMesa(rs.getInt("idMesa"));
+                mesa.setEstadoMesa(rs.getInt("estadoMesa"));
+                mesa.setCapacidad(rs.getInt("capacidad"));
+                mesas.add(mesa);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla mesa." + ex.getMessage());
+        }
+        return mesas;
+    }
+    
 }

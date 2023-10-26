@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/RestoIlFucile/Ilfucileresto/src/ilfucileresto/Entidades/DetallePedido.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/RestoIlFucile/Ilfucileresto/src/ilfucileresto/vistas/Pedidos.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/RestoIlFucile/Ilfucileresto/src/ilfucileresto/vistas/Productos.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/RestoIlFucile/Ilfucileresto/src/ilfucileresto/Entidades/Pedido.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/RestoIlFucile/Ilfucileresto/src/ilfucileresto/AccesoADatos/DetallePedidoData.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/RestoIlFucile/Ilfucileresto/src/ilfucileresto/AccesoADatos/PedidoData.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/RestoIlFucile/Ilfucileresto/src/ilfucileresto/vistas/Menu.java</file>
+            <file>file:/C:/Users/ferge/Documents/GitHub/Ilfucileresto/src/ilfucileresto/vistas/Menu.java</file>
+            <file>file:/C:/Users/ferge/Documents/GitHub/Ilfucileresto/src/ilfucileresto/Entidades/DetallePedido.java</file>
+            <file>file:/C:/Users/ferge/Documents/GitHub/Ilfucileresto/src/ilfucileresto/vistas/Mesas.java</file>
+            <file>file:/C:/Users/ferge/Documents/GitHub/Ilfucileresto/src/ilfucileresto/vistas/Pedidos.java</file>
+            <file>file:/C:/Users/ferge/Documents/GitHub/Ilfucileresto/src/ilfucileresto/AccesoADatos/PedidoData.java</file>
+            <file>file:/C:/Users/ferge/Documents/GitHub/Ilfucileresto/src/ilfucileresto/AccesoADatos/DetallePedidoData.java</file>
+            <file>file:/C:/Users/ferge/Documents/GitHub/Ilfucileresto/src/ilfucileresto/vistas/Administracion.java</file>
         </group>
     </open-files>
 </project-private>
