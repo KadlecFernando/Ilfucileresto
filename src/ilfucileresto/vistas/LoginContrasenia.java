@@ -20,6 +20,7 @@ public class LoginContrasenia extends javax.swing.JFrame {
     EmpleadoData eD = new EmpleadoData();
     public static String contra;
     public static Empleado e;
+    public static Login l;
 
     /**
      * Creates new form LoginContrasenia
@@ -172,6 +173,12 @@ public class LoginContrasenia extends javax.swing.JFrame {
                 }
                 e.setPassword(contraNueva);
                 eD.modificarLogin(e);
+                Menu mnu = new Menu();
+                mnu.setVisible(true);
+                mnu.setLocationRelativeTo(null);
+                mnu.usuario = e.getPuesto();
+                mnu.seguridadUsuario();
+                l.dispose();
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "La contraseña debe tener un largo máximo de 16 caracteres.");

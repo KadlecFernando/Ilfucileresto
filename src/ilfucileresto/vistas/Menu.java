@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.swing.GroupLayout.Alignment.CENTER;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIDefaults;
@@ -259,6 +260,7 @@ public class Menu extends javax.swing.JFrame {
             adm = new Administracion();
             adm.setVisible(true);
             adm.setTitle("Administracion");
+            adm.mnu = this;
             Escritorio.add(adm);
             flagAdmin = true;
             try {
@@ -403,12 +405,11 @@ public class Menu extends javax.swing.JFrame {
     public void seguridadUsuario() {
         if ("MESERO".equals(usuario)) {
             btnAdministracion.setEnabled(false);
-            btnAdministracion.setVisible(false);
-            lblUsuario.setText("-"+usuario+"-");            
+            lblUsuario.setText("-"+usuario+"-");
         }
         if ("ENCARGADO".equals(usuario)) {
-            btnMesas.setEnabled(false);
-            btnMesas.setVisible(false);
+            //btnMesas.setEnabled(false);
+            //btnMesas.setVisible(false);
             lblUsuario.setText("-ADMIN-");
             lblUsuario.setLocation(SwingConstants.CENTER,SwingConstants.CENTER);
         }

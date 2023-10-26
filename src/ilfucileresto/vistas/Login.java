@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 /**
  *
@@ -28,7 +29,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-
+        jPanel1.setFocusable(true);
         //Esto iria en Customize Code
         //txtUsuario.setOpaque(false);
         //txtUsuario.setBackground(new Color(255,255,255,50));
@@ -46,7 +47,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new FondoPanel();
         btnIngresar = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
-        txtContrasenia = new javax.swing.JTextField();
+        txtContrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -69,6 +70,11 @@ public class Login extends javax.swing.JFrame {
         txtUsuario.setText("Usuario");
         txtUsuario.setOpaque(false);
         txtUsuario.setBackground(new Color(255,255,255,80));
+        txtUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtUsuarioFocusGained(evt);
+            }
+        });
         txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtUsuarioMouseClicked(evt);
@@ -89,27 +95,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         txtContrasenia.setText("Contraseña");
-        txtContrasenia.setFont(new java.awt.Font("Dialog", 1, 12));
-        txtContrasenia.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtContrasenia.setOpaque(false);
         txtContrasenia.setBackground(new Color(255,255,255,80));
-        txtContrasenia.setForeground(new java.awt.Color(51, 51, 51));
-        txtContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtContraseniaMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtContraseniaMousePressed(evt);
-            }
-        });
-        txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseniaActionPerformed(evt);
-            }
-        });
-        txtContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtContraseniaKeyTyped(evt);
+        txtContrasenia.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtContraseniaFocusGained(evt);
             }
         });
 
@@ -117,17 +107,17 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(515, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtContrasenia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(77, 77, 77))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(147, 147, 147))))
+                        .addGap(147, 147, 147))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(77, 77, 77))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,13 +168,14 @@ public class Login extends javax.swing.JFrame {
                 lg.setLocationRelativeTo(this);
                 lg.contra = contrasenia;
                 lg.e = e;
+                lg.l = this;
             } else {
                 Menu mnu = new Menu();
                 mnu.setVisible(true);
                 mnu.setLocationRelativeTo(null);
                 mnu.usuario = e.getPuesto();
                 mnu.seguridadUsuario();
-
+                this.dispose();
             }
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
@@ -192,10 +183,6 @@ public class Login extends javax.swing.JFrame {
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
 
     }//GEN-LAST:event_txtUsuarioActionPerformed
-
-    private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
-
-    }//GEN-LAST:event_txtContraseniaActionPerformed
 
     private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
         char caracter = evt.getKeyChar();
@@ -205,33 +192,25 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUsuarioKeyTyped
 
-    private void txtContraseniaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseniaKeyTyped
-        char caracter = evt.getKeyChar();
-        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == '.') || (caracter == KeyEvent.VK_DELETE)
-                || (caracter >= 'A') && (caracter <= 'Z') || (caracter >= 'a') && (caracter <= 'z')))) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtContraseniaKeyTyped
-
     private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
-        if ("Usuario".equals(txtUsuario.getText())) {
-            txtUsuario.setText("");
-        }
+
     }//GEN-LAST:event_txtUsuarioMouseClicked
 
     private void txtUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMousePressed
 
     }//GEN-LAST:event_txtUsuarioMousePressed
 
-    private void txtContraseniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseniaMousePressed
+    private void txtUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFocusGained
+        if ("Usuario".equals(txtUsuario.getText())) {
+            txtUsuario.setText("");
+        }
+    }//GEN-LAST:event_txtUsuarioFocusGained
 
-    }//GEN-LAST:event_txtContraseniaMousePressed
-
-    private void txtContraseniaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseniaMouseClicked
+    private void txtContraseniaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseniaFocusGained
         if ("Contraseña".equals(txtContrasenia.getText())) {
             txtContrasenia.setText("");
         }
-    }//GEN-LAST:event_txtContraseniaMouseClicked
+    }//GEN-LAST:event_txtContraseniaFocusGained
 
     /**
      * @param args the command line arguments
@@ -242,6 +221,9 @@ public class Login extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        UIManager.put("nimbusBase", new Color(173, 89, 42));
+        UIManager.put("control", new Color(224, 154, 114));
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -283,12 +265,14 @@ public class Login extends javax.swing.JFrame {
             super.paint(g);
         }
     }
+    
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtContrasenia;
+    private javax.swing.JPasswordField txtContrasenia;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

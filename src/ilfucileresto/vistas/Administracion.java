@@ -23,7 +23,7 @@ public class Administracion extends javax.swing.JInternalFrame {
 
     private MesaData mD = new MesaData();
     private EmpleadoData eD = new EmpleadoData();
-
+    public Menu mnu;
     /**
      * Creates new form Administracion
      */
@@ -132,27 +132,21 @@ public class Administracion extends javax.swing.JInternalFrame {
         );
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Nombre:");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Apellido:");
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Puesto:");
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("DNI:");
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Contraseña:");
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Usuario:");
 
         txtDNI.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -304,11 +298,9 @@ public class Administracion extends javax.swing.JInternalFrame {
         );
 
         lbNumeroMesa.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lbNumeroMesa.setForeground(new java.awt.Color(0, 0, 0));
         lbNumeroMesa.setText("-------");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Mesa N°:");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -317,7 +309,6 @@ public class Administracion extends javax.swing.JInternalFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Capacidad:");
 
         txtCapacidadA.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -358,7 +349,6 @@ public class Administracion extends javax.swing.JInternalFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Capacidad:");
 
         txtCapacidadB.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -388,7 +378,7 @@ public class Administracion extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCapacidadB, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                         .addComponent(btnModificarMesa)))
                 .addGap(80, 80, 80))
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -409,7 +399,7 @@ public class Administracion extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(65, Short.MAX_VALUE)
+                        .addContainerGap(69, Short.MAX_VALUE)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -457,6 +447,10 @@ public class Administracion extends javax.swing.JInternalFrame {
         mD.guardarMesa(mesa);
         txtCapacidadA.setText("");
         cargarLb();
+        if (mnu.flagMesas==true){
+            mnu.flagMesas=false;
+            mnu.ms.dispose();
+        }
 
     }//GEN-LAST:event_btnAgregarMesaActionPerformed
 
@@ -502,7 +496,7 @@ public class Administracion extends javax.swing.JInternalFrame {
 
     private void btnAgregarMesa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMesa1ActionPerformed
         if (txtApellido.getText().isEmpty() || txtNombre.getText().isEmpty() || txtDNI.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Relleno todos los campos.");
+            JOptionPane.showMessageDialog(this, "Rellene todos los campos.");
             return;
         }
         Empleado empleado = new Empleado();
