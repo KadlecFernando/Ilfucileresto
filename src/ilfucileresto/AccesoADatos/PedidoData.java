@@ -84,6 +84,40 @@ public class PedidoData {
 
         return pedido;
     }
+    
+     public Pedido buscarPedidoAbiertoPorMesa(Mesa mesa) {
+
+        Pedido pedido = null;
+        String sql = "SELECT idPedido,idEmpleado,fechaHora,importe,estado,pago FROM pedido WHERE idMesa = ? AND pago=0";
+
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mesa.getIdMesa());
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                pedido = new Pedido();
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                Empleado empleado = empleadoData.buscarEmpleado(rs.getInt("idEmpleado"));
+                pedido.setMesa(mesa);
+                pedido.setEmpleado(empleado);
+                Timestamp fecha = rs.getTimestamp("fechaHora");
+                pedido.setFechaHora(fecha.toLocalDateTime());
+                pedido.setImporte(rs.getDouble("importe"));
+                pedido.setEstado(rs.getInt("estado"));
+                pedido.setPago(rs.getBoolean("pago"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el pedido.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido " + ex.getMessage());
+        }
+
+        return pedido;
+    }
 
     public void modificarPedido(Pedido pedido) {
 

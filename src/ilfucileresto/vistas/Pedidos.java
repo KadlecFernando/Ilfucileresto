@@ -106,6 +106,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnDescartar = new javax.swing.JButton();
+        lblModo = new javax.swing.JLabel();
         pnVerPedido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -303,61 +304,68 @@ public class Pedidos extends javax.swing.JInternalFrame {
             }
         });
 
+        lblModo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblModo.setText("Nuevo Pedido");
+
         javax.swing.GroupLayout pnAgregarPedidoLayout = new javax.swing.GroupLayout(pnAgregarPedido);
         pnAgregarPedido.setLayout(pnAgregarPedidoLayout);
         pnAgregarPedidoLayout.setHorizontalGroup(
             pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
-                .addContainerGap(528, Short.MAX_VALUE)
-                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDescartar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(62, 62, 62)
+                .addContainerGap(531, Short.MAX_VALUE)
                 .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarPedidoLayout.createSequentialGroup()
+                        .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDescartar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(62, 62, 62)
                         .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarPedidoLayout.createSequentialGroup()
-                                .addComponent(cboMozo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarPedidoLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(176, 176, 176)))
-                        .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(cboMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
-                            .addComponent(btnAceptar)
-                            .addGap(30, 30, 30)
-                            .addComponent(btnCancelar))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(62, 62, 62))
+                            .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
+                                    .addComponent(btnAceptar)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(btnCancelar))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
+                                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboMozo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(cboMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(62, 62, 62))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarPedidoLayout.createSequentialGroup()
+                        .addComponent(lblModo)
+                        .addGap(194, 194, 194))))
             .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
                     .addGap(30, 30, 30)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(647, Short.MAX_VALUE)))
+                    .addContainerGap(652, Short.MAX_VALUE)))
         );
         pnAgregarPedidoLayout.setVerticalGroup(
             pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarPedidoLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboMozo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(lblModo)
+                .addGap(18, 18, 18)
+                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(btnDescartar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarPedidoLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(226, 226, 226))
+                    .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
+                        .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cboMozo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,9 +373,9 @@ public class Pedidos extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26))
             .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
-                    .addGap(53, 53, 53)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(26, 26, 26)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(24, Short.MAX_VALUE)))
         );
 
         Solapas.addTab("Agregar Pedido", pnAgregarPedido);
@@ -432,7 +440,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnPago)
+                    .addComponent(btnPago, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -446,16 +454,16 @@ public class Pedidos extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61)
                         .addComponent(jLabel1))
                     .addComponent(jtTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(btnPago, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107))
+                .addGap(32, 32, 32)
+                .addComponent(btnPago, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 221, 164));
@@ -597,60 +605,87 @@ public class Pedidos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        if (cboMozo.getSelectedItem() == null || cboMesas.getSelectedItem() == null || tbPedido.getRowCount() < 0) {
-            JOptionPane.showMessageDialog(this, "Debe completar todos los datos.");
+    private void cboMozosPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMozosPopupMenuWillBecomeVisible
+        Empleado emp = (Empleado) cboMozos.getSelectedItem();
+        cboMozos.removeAllItems();
+        List<Empleado> empleados = eD.listarEmpleados();
+        cargarComboMozos(cboMozos);
+        cboMozos.setSelectedItem(emp);
+    }//GEN-LAST:event_cboMozosPopupMenuWillBecomeVisible
+
+    private void SolapasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SolapasMouseClicked
+    }//GEN-LAST:event_SolapasMouseClicked
+
+    private void cboMozosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboMozosItemStateChanged
+        if (cboMozos.getSelectedItem() != null) {
+            cargarTablaPedidos();
+        } else {
+            modeloDetallePedido.setRowCount(0);
+        }
+    }//GEN-LAST:event_cboMozosItemStateChanged
+
+    private void tablaDetallePedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDetallePedidoMouseClicked
+
+        cargarTablaDetallePedidos();
+        String pago = (String)modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(),3);
+        if (pago.equals("Pago")){
+           btnPago.setEnabled(false);
+        }else if(pago.equals("Sin pagar")){
+            btnPago.setEnabled(true);
+        }
+    }//GEN-LAST:event_tablaDetallePedidoMouseClicked
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        if (tablaDetallePedido.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un pedido");
             return;
         }
-        Pedido p = new Pedido();
-        DetallePedido dp = new DetallePedido();
-        Empleado e = (Empleado) cboMozo.getSelectedItem();
-        Mesa m = (Mesa) cboMesas.getSelectedItem();
-        p.setEmpleado(e);
-        p.setMesa(m);
-        p.setFechaHora(LocalDateTime.now());
-        p.setPago(false);
-        p.setEstado(1);
-        dp.setPedido(p);
-        peD.guardarPedido(p);
+        Solapas.setSelectedIndex(0);
+        lblModo.setText("Modificar Pedido");
 
-        Map<Integer, Integer> conteoProductos = new HashMap<>();
-        for (int fila = 0; fila < modeloVacio.getRowCount(); fila++) {
-            Integer producto = (Integer) modeloVacio.getValueAt(fila, 0);
-            conteoProductos.put(producto, conteoProductos.getOrDefault(producto, 0) + 1);
-        }
-        for (Map.Entry<Integer, Integer> entry : conteoProductos.entrySet()) {
-            int key = Integer.valueOf(entry.getKey());
-            Producto pro = pD.buscarProducto(key);
-            Integer value = entry.getValue();
-            dpD.agregarDetallePedido(p, pro, value);
-        }
-        double total = dpD.calcularTotal(p);
-        p.setImporte(total);
-        peD.modificarPedido(p);
-        cboMesas.setSelectedIndex(0);
-        cboMozo.setSelectedIndex(0);
+        int e = (Integer) tablaDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
+        Pedido p = peD.buscarPedido(e);
+        int idEmpleado = p.getEmpleado().getIdEmpleado();
+        Empleado mozo = eD.buscarEmpleado(idEmpleado);
+        cboMozo.setSelectedItem(mozo);
+        cboMesas.setSelectedItem(p.getMesa());
+        List<DetallePedido> dp = dpD.listarDetallePedidosPorId(e);
         modeloVacio.setRowCount(0);
-    }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        int x = JOptionPane.showConfirmDialog(this, "¿Desea cancelar el pedido? Los productos ingresados se perderán.", "Cancelar Pedido", JOptionPane.YES_NO_OPTION);
-        if (x == JOptionPane.YES_OPTION) {
-            for (int i = 0; i < tbPedido.getRowCount(); i++) {
-                Integer codigo = (Integer) modeloVacio.getValueAt(i, 0);
-                String descripcion = (String) modeloVacio.getValueAt(i, 1);
-                Double precioUnitario = (Double) modeloVacio.getValueAt(i, 2);
-                Producto seleccionado = pD.buscarProducto(codigo);
-                seleccionado.setStock(seleccionado.getStock() + 1);
-                if (seleccionado.getStock() == 1) {
-                    seleccionado.setEstado(true);
-                }
-                pD.modificarProducto(seleccionado);
+        for (DetallePedido d : dp) {
+            for (int i = 0; i < d.getCantidad(); i++) {
+                modeloVacio.addRow(new Object[]{d.getProducto().getIdProducto(), d.getProducto().getNombreProducto(),
+                    d.getProducto().getPrecioUnitario()});
             }
-            modeloVacio.setRowCount(0);
-            mostrarDatosTablaProductos();
         }
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescartarActionPerformed
+        if (tbPedido.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto.");
+            return;
+        }
+        Integer codigo = (Integer) modeloVacio.getValueAt(tbPedido.getSelectedRow(), 0);
+        String descripcion = (String) modeloVacio.getValueAt(tbPedido.getSelectedRow(), 1);
+        Double precioUnitario = (Double) modeloVacio.getValueAt(tbPedido.getSelectedRow(), 2);
+        modeloVacio.removeRow(tbPedido.getSelectedRow());
+        Producto seleccionado = pD.buscarProducto(codigo);
+        seleccionado.setStock(seleccionado.getStock() + 1);
+        if (seleccionado.getStock() == 1) {
+            seleccionado.setEstado(true);
+        }
+        pD.modificarProducto(seleccionado);
+        mostrarDatosTablaProductos();
+    }//GEN-LAST:event_btnDescartarActionPerformed
+
+    private void btnDescartarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescartarMouseReleased
+        btnDescartar.setContentAreaFilled(false);
+        btnDescartar.setBackground(new Color(173, 89, 42, 200));
+    }//GEN-LAST:event_btnDescartarMouseReleased
+
+    private void btnDescartarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescartarMousePressed
+        btnDescartar.setContentAreaFilled(true);
+        btnDescartar.setBackground(new Color(254, 89, 68));
+    }//GEN-LAST:event_btnDescartarMousePressed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         if (tbProductos.getSelectedRow() < 0) {
@@ -674,44 +709,10 @@ public class Pedidos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void cboMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMesasActionPerformed
-
-    }//GEN-LAST:event_cboMesasActionPerformed
-
-    private void cboMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboMesasMouseClicked
-
-
-    }//GEN-LAST:event_cboMesasMouseClicked
-
-    private void cboMesasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboMesasFocusGained
-    }//GEN-LAST:event_cboMesasFocusGained
-
-    private void cboMesasPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMesasPopupMenuWillBecomeVisible
-        Mesa seleccionada = (Mesa) cboMesas.getSelectedItem();
-        cargarComboMesas();
-        cboMesas.setSelectedItem(seleccionada);
-    }//GEN-LAST:event_cboMesasPopupMenuWillBecomeVisible
-
-    private void cboMesasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cboMesasPropertyChange
-    }//GEN-LAST:event_cboMesasPropertyChange
-
-    private void btnDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescartarActionPerformed
-        if (tbPedido.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto.");
-            return;
-        }
-        Integer codigo = (Integer) modeloVacio.getValueAt(tbPedido.getSelectedRow(), 0);
-        String descripcion = (String) modeloVacio.getValueAt(tbPedido.getSelectedRow(), 1);
-        Double precioUnitario = (Double) modeloVacio.getValueAt(tbPedido.getSelectedRow(), 2);
-        modeloVacio.removeRow(tbPedido.getSelectedRow());
-        Producto seleccionado = pD.buscarProducto(codigo);
-        seleccionado.setStock(seleccionado.getStock() + 1);
-        if (seleccionado.getStock() == 1) {
-            seleccionado.setEstado(true);
-        }
-        pD.modificarProducto(seleccionado);
-        mostrarDatosTablaProductos();
-    }//GEN-LAST:event_btnDescartarActionPerformed
+    private void btnAgregarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseReleased
+        btnAgregar.setContentAreaFilled(false);
+        btnAgregar.setBackground(new Color(173, 89, 42, 200));
+    }//GEN-LAST:event_btnAgregarMouseReleased
 
     private void btnAgregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMousePressed
         btnAgregar.setContentAreaFilled(true);
@@ -719,102 +720,125 @@ public class Pedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAgregarMousePressed
 
     private void btnAgregarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseExited
+
     }//GEN-LAST:event_btnAgregarMouseExited
 
-    private void btnDescartarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescartarMousePressed
-        btnDescartar.setContentAreaFilled(true);
-        btnDescartar.setBackground(new Color(254, 89, 68));
-    }//GEN-LAST:event_btnDescartarMousePressed
-
-    private void btnAgregarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseReleased
-        btnAgregar.setContentAreaFilled(false);
-        btnAgregar.setBackground(new Color(173, 89, 42, 200));
-    }//GEN-LAST:event_btnAgregarMouseReleased
-
-    private void btnDescartarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescartarMouseReleased
-        btnDescartar.setContentAreaFilled(false);
-        btnDescartar.setBackground(new Color(173, 89, 42, 200));
-    }//GEN-LAST:event_btnDescartarMouseReleased
-
-    private void tbProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductosMouseClicked
-    }//GEN-LAST:event_tbProductosMouseClicked
-
-    private void cboMozosPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMozosPopupMenuWillBecomeVisible
-        Empleado emp = (Empleado) cboMozos.getSelectedItem();
-        cboMozos.removeAllItems();
-        List<Empleado> empleados = eD.listarEmpleados();
-        cargarComboMozos(cboMozos);
-        cboMozos.setSelectedItem(emp);
-    }//GEN-LAST:event_cboMozosPopupMenuWillBecomeVisible
-
-    private void cboMozoPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMozoPopupMenuWillBecomeVisible
-    }//GEN-LAST:event_cboMozoPopupMenuWillBecomeVisible
-
-    private void SolapasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SolapasMouseClicked
-    }//GEN-LAST:event_SolapasMouseClicked
-
-    private void cboMozosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboMozosItemStateChanged
-        if (cboMozos.getSelectedItem() != null) {
-            Empleado e = (Empleado) cboMozos.getSelectedItem();
-            List<DetallePedido> detalles = dpD.listarDetallePedidosPorEmpleadoPreciosHora(e.getIdEmpleado());
-            modeloDetallePedido.setRowCount(0);
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-            String pago = "";
-            for (DetallePedido d : detalles) {
-                if (d.getPedido().isPago()) {
-                    pago = "Pago";
-                } else {
-                    pago = "Sin pagar";
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        int x = JOptionPane.showConfirmDialog(this, "¿Desea cancelar el pedido? Los productos ingresados se perderán.", "Cancelar Pedido", JOptionPane.YES_NO_OPTION);
+        if (x == JOptionPane.YES_OPTION) {
+            for (int i = 0; i < tbPedido.getRowCount(); i++) {
+                Integer codigo = (Integer) modeloVacio.getValueAt(i, 0);
+                String descripcion = (String) modeloVacio.getValueAt(i, 1);
+                Double precioUnitario = (Double) modeloVacio.getValueAt(i, 2);
+                Producto seleccionado = pD.buscarProducto(codigo);
+                seleccionado.setStock(seleccionado.getStock() + 1);
+                if (seleccionado.getStock() == 1) {
+                    seleccionado.setEstado(true);
                 }
-                String fecha = d.getPedido().getFechaHora().format(formato);
-                modeloDetallePedido.addRow(new Object[]{d.getPedido().getIdPedido(), d.getPedido().getMesa().getIdMesa(),
-                    fecha, pago});
+                pD.modificarProducto(seleccionado);
             }
-        } else {
-            modeloDetallePedido.setRowCount(0);
+            modeloVacio.setRowCount(0);
+            mostrarDatosTablaProductos();
+            lblModo.setText("Nuevo Pedido");
         }
-    }//GEN-LAST:event_cboMozosItemStateChanged
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void tablaDetallePedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDetallePedidoMouseClicked
-        if (tablaDetallePedido.getSelectedRow() >= 0) {
-            int x = (Integer) tablaDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
-            List<DetallePedido> dp = dpD.listarDetallePedidosPorId(x);
-            Set<DetallePedido> setDP = new HashSet<>(dp);
-            modeloDetalle.setRowCount(0);
-            for (DetallePedido d : setDP) {
-                double sub = dpD.calcularSubtotal(d.getProducto(), d.getCantidad());
-                modeloDetalle.addRow(new Object[]{d.getPedido().getIdPedido(), d.getProducto().getNombreProducto(), d.getCantidad(), sub});
-            }
-            Pedido p = peD.buscarPedido(x);
-            jtTotal.setText(dpD.calcularTotal(p) + "");
-        }
-    }//GEN-LAST:event_tablaDetallePedidoMouseClicked
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        if (tablaDetallePedido.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(this, "Seleccione un pedido");
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        if (cboMozo.getSelectedItem() == null || cboMesas.getSelectedItem() == null || tbPedido.getRowCount() < 0) {
+            JOptionPane.showMessageDialog(this, "Debe completar todos los datos.");
             return;
         }
-        Solapas.setSelectedIndex(0);
+        Pedido p = new Pedido();
+        DetallePedido dp = new DetallePedido();
+        Empleado e = (Empleado) cboMozo.getSelectedItem();
+        Mesa m = (Mesa) cboMesas.getSelectedItem();
+        p.setEmpleado(e);
+        p.setMesa(m);
+        p.setFechaHora(LocalDateTime.now());
+        p.setPago(false);
+        p.setEstado(1);
+        dp.setPedido(p);
+        if (lblModo.getText().equals("Modificar Pedido")) {
+            peD.modificarPedido(p);
+        } else {
+            peD.guardarPedido(p);
+        }
 
-        int e = (Integer) tablaDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
-        Pedido p = peD.buscarPedido(e);
-        int idEmpleado = p.getEmpleado().getIdEmpleado();
-        Empleado mozo = eD.buscarEmpleado(idEmpleado);
-        cboMozo.setSelectedItem(mozo);
-        cboMesas.setSelectedItem(p.getMesa());
-        List<DetallePedido> dp = dpD.listarDetallePedidosPorId(e);
-        modeloVacio.setRowCount(0);
-        for (DetallePedido d : dp) {
-            for (int i = 0; i < d.getCantidad(); i++) {
-                modeloVacio.addRow(new Object[]{d.getProducto().getIdProducto(), d.getProducto().getNombreProducto(),
-                    d.getProducto().getPrecioUnitario()});
+        Map<Integer, Integer> conteoProductos = new HashMap<>();
+        for (int fila = 0; fila < modeloVacio.getRowCount(); fila++) {
+            Integer producto = (Integer) modeloVacio.getValueAt(fila, 0);
+            conteoProductos.put(producto, conteoProductos.getOrDefault(producto, 0) + 1);
+        }
+        for (Map.Entry<Integer, Integer> entry : conteoProductos.entrySet()) {
+            int key = Integer.valueOf(entry.getKey());
+            Producto pro = pD.buscarProducto(key);
+            Integer value = entry.getValue();
+            if (lblModo.getText().equals("Modificar Pedido")) {
+                dpD.actualizarDetallePedido(p, pro, value);
+            } else {
+                dpD.agregarDetallePedido(p, pro, value);
             }
         }
-    }//GEN-LAST:event_btnModificarActionPerformed
+        double total = dpD.calcularTotal(p);
+        p.setImporte(total);
+        peD.modificarPedido(p);
+        cboMesas.setSelectedIndex(0);
+        cboMozo.setSelectedIndex(0);
+        modeloVacio.setRowCount(0);
+        lblModo.setText("Nuevo Pedido");
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void cboMesasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cboMesasPropertyChange
+
+    }//GEN-LAST:event_cboMesasPropertyChange
+
+    private void cboMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMesasActionPerformed
+
+    }//GEN-LAST:event_cboMesasActionPerformed
+
+    private void cboMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboMesasMouseClicked
+
+    }//GEN-LAST:event_cboMesasMouseClicked
+
+    private void cboMesasPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMesasPopupMenuWillBecomeVisible
+        Mesa seleccionada = (Mesa) cboMesas.getSelectedItem();
+        cargarComboMesas();
+        cboMesas.setSelectedItem(seleccionada);
+    }//GEN-LAST:event_cboMesasPopupMenuWillBecomeVisible
+
+    private void cboMesasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboMesasFocusGained
+
+    }//GEN-LAST:event_cboMesasFocusGained
+
+    private void cboMozoPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cboMozoPopupMenuWillBecomeVisible
+
+    }//GEN-LAST:event_cboMozoPopupMenuWillBecomeVisible
+
+    private void tbProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductosMouseClicked
+
+    }//GEN-LAST:event_tbProductosMouseClicked
 
     private void btnPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagoActionPerformed
-        // TODO add your handling code here:
+
+        if (tablaDetallePedido.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un pedido.");
+            return;
+        }
+
+        int x = JOptionPane.showConfirmDialog(this, "¿Desea cerrar la mesa?. La cuenta se guardará como 'PAGÓ'", "Cerrar Cuenta", JOptionPane.YES_NO_OPTION);
+        if (x == JOptionPane.YES_OPTION) {
+            int idPedido = (Integer) modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
+            Pedido pedido = peD.buscarPedido(idPedido);
+            Mesa mesa = pedido.getMesa();
+            mesa.setEstadoMesa(0);
+            pedido.setPago(true);
+            mD.modificarMesa(mesa);
+            peD.modificarPedido(pedido);
+            cargarTablaPedidos();
+            cargarTablaDetallePedidos();
+        }
+
+
     }//GEN-LAST:event_btnPagoActionPerformed
 
     public void cargarColumnasProductos() {
@@ -881,6 +905,39 @@ public class Pedidos extends javax.swing.JInternalFrame {
 
     }
 
+    public void cargarTablaPedidos() {
+        Empleado e = (Empleado) cboMozos.getSelectedItem();
+        List<DetallePedido> detalles = dpD.listarDetallePedidosPorEmpleadoPreciosHora(e.getIdEmpleado());
+        modeloDetallePedido.setRowCount(0);
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String pago = "";
+        for (DetallePedido d : detalles) {
+            if (d.getPedido().isPago()) {
+                pago = "Pago";
+            } else {
+                pago = "Sin pagar";
+            }
+            String fecha = d.getPedido().getFechaHora().format(formato);
+            modeloDetallePedido.addRow(new Object[]{d.getPedido().getIdPedido(), d.getPedido().getMesa().getIdMesa(),
+                fecha, pago});
+        }
+    }
+
+    public void cargarTablaDetallePedidos() {
+        if (tablaDetallePedido.getSelectedRow() >= 0) {
+            int x = (Integer) tablaDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
+            List<DetallePedido> dp = dpD.listarDetallePedidosPorId(x);
+            Set<DetallePedido> setDP = new HashSet<>(dp);
+            modeloDetalle.setRowCount(0);
+            for (DetallePedido d : setDP) {
+                double sub = dpD.calcularSubtotal(d.getProducto(), d.getCantidad());
+                modeloDetalle.addRow(new Object[]{d.getPedido().getIdPedido(), d.getProducto().getNombreProducto(), d.getCantidad(), sub});
+            }
+            Pedido p = peD.buscarPedido(x);
+            jtTotal.setText(dpD.calcularTotal(p) + "");
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane Solapas;
@@ -910,6 +967,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jtTotal;
+    private javax.swing.JLabel lblModo;
     private javax.swing.JPanel pnAgregarPedido;
     private javax.swing.JPanel pnVerPedido;
     private javax.swing.JTable tablaDetalle;

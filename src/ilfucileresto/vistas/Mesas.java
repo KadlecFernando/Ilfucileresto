@@ -6,7 +6,9 @@
 package ilfucileresto.vistas;
 
 import ilfucileresto.AccesoADatos.MesaData;
+import ilfucileresto.AccesoADatos.PedidoData;
 import ilfucileresto.Entidades.Mesa;
+import ilfucileresto.Entidades.Pedido;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -17,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -163,6 +166,12 @@ public class Mesas extends javax.swing.JInternalFrame {
                         mesa.setEstadoMesa(1);
                         mD.modificarMesa(mesa);
                     }else{
+                        PedidoData peD = new PedidoData();
+                        Pedido pedido = peD.buscarPedidoAbiertoPorMesa(mesa);
+                        if(pedido!=null){
+                            JOptionPane.showMessageDialog(rootPane, "La mesa no puede cambiar su estado a LIBRE por tener pedidos pendientes.");
+                            return;
+                        }
                         boton.setBackground(Color.green);
                         mesa.setEstadoMesa(0);
                         mD.modificarMesa(mesa);
