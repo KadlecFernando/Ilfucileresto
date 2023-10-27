@@ -117,8 +117,6 @@ public class Empleado {
         hash = 67 * hash + Objects.hashCode(this.nombre);
         hash = 67 * hash + Objects.hashCode(this.DNI);
         hash = 67 * hash + Objects.hashCode(this.puesto);
-        hash = 67 * hash + Objects.hashCode(this.user);
-        hash = 67 * hash + Objects.hashCode(this.password);
         hash = 67 * hash + (this.estado ? 1 : 0);
         return hash;
     }
@@ -153,12 +151,7 @@ public class Empleado {
         if (!Objects.equals(this.puesto, other.puesto)) {
             return false;
         }
-        if (!Objects.equals(this.user, other.user)) {
-            return false;
-        }
-        if (!Objects.equals(this.password, other.password)) {
-            return false;
-        }
+      
         return true;
     }
 

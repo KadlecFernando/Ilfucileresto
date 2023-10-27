@@ -141,7 +141,7 @@ public class PedidoData {
             }
         } catch (SQLException ex) {
             if (exito == 0) {
-                JOptionPane.showMessageDialog(null, "El pedido no existe.");
+//                JOptionPane.showMessageDialog(null, "El pedido no existe.");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido " + ex.getMessage());
             }
