@@ -31,7 +31,7 @@ public class ProductoData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 producto.setIdProducto(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Producto añadido con éxito ");
+                //JOptionPane.showMessageDialog(null, "Producto añadido con éxito ");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -82,7 +82,7 @@ public class ProductoData {
 
             exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
+                //JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
             }
         } catch (SQLException ex) {
             if (exito == 0) {
@@ -96,7 +96,7 @@ public class ProductoData {
     public List<Producto> listarProductos() {
         List<Producto> productos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM producto";
+            String sql = "SELECT * FROM producto ORDER BY estado desc";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

@@ -78,7 +78,7 @@ public class MesaData {
             exito = ps.executeUpdate();
             
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
+                //JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
             }
         } catch (SQLException ex) {
             if (exito == 0) {
@@ -89,10 +89,17 @@ public class MesaData {
         }
     }
     
-     public List<Mesa> listarMesas() {
+    public List<Mesa> listarMesas(boolean filtroEstado) {
         List<Mesa> mesas = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM mesa";
+            String sql="";
+            
+            if (filtroEstado){
+                sql = "SELECT * FROM mesa WHERE estadoMesa = 1";  
+            }else{
+                sql = "SELECT * FROM mesa";
+            }
+            
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -108,4 +115,25 @@ public class MesaData {
         }
         return mesas;
     }
+    
+    public List<Mesa> listarMesasDesc() {
+        List<Mesa> mesas = new ArrayList<>();
+        try {
+            String sql="SELECT * FROM mesa ORDER BY idMesa DESC";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Mesa mesa = new Mesa();
+                mesa.setIdMesa(rs.getInt("idMesa"));
+                mesa.setEstadoMesa(rs.getInt("estadoMesa"));
+                mesa.setCapacidad(rs.getInt("capacidad"));
+                mesas.add(mesa);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla mesa." + ex.getMessage());
+        }
+        return mesas;
+    }
+    
 }

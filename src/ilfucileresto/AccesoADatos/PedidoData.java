@@ -84,6 +84,40 @@ public class PedidoData {
 
         return pedido;
     }
+    
+     public Pedido buscarPedidoAbiertoPorMesa(Mesa mesa) {
+
+        Pedido pedido = null;
+        String sql = "SELECT idPedido,idEmpleado,fechaHora,importe,estado,pago FROM pedido WHERE idMesa = ? AND pago=0";
+
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mesa.getIdMesa());
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                pedido = new Pedido();
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                Empleado empleado = empleadoData.buscarEmpleado(rs.getInt("idEmpleado"));
+                pedido.setMesa(mesa);
+                pedido.setEmpleado(empleado);
+                Timestamp fecha = rs.getTimestamp("fechaHora");
+                pedido.setFechaHora(fecha.toLocalDateTime());
+                pedido.setImporte(rs.getDouble("importe"));
+                pedido.setEstado(rs.getInt("estado"));
+                pedido.setPago(rs.getBoolean("pago"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el pedido.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido " + ex.getMessage());
+        }
+
+        return pedido;
+    }
 
     public void modificarPedido(Pedido pedido) {
 
@@ -158,6 +192,27 @@ public class PedidoData {
         return pedidos;
     }
 
+    public List<Pedido> listarPedidosPorMeseroMesa(Empleado mesero, Mesa mesa) {
+
+        //Ver parametro opcional para fecha...
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            String sql = "SELECT idPedido FROM pedido WHERE idEmpleado = ? AND idMesa=? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, mesero.getIdEmpleado());
+            ps.setInt(2, mesa.getIdMesa());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pedido pedido = this.buscarPedido(rs.getInt("idPedido"));
+                pedidos.add(pedido);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido." + ex.getMessage());
+        }
+        return pedidos;
+    }
+
     public List<Pedido> listarPedidosPorMesaPorHora(Mesa mesa, LocalDate dia, LocalTime horaDesde, LocalTime horaHasta) {
         List<Pedido> pedidos = new ArrayList<>();
 
@@ -181,7 +236,7 @@ public class PedidoData {
     }
 
     public double calcularIngresosPorFecha(LocalDate fecha) {
-        double total=-1;
+        double total = -1;
         try {
             String sql = "SELECT sum(importe) as total FROM pedido WHERE DATE(fechaHora) = ?";
             PreparedStatement ps = con.prepareStatement(sql);
