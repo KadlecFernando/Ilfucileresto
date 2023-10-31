@@ -553,14 +553,14 @@ public class Administracion extends javax.swing.JInternalFrame {
 
     private void txtCapacidadAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadAKeyTyped
         char caracter = evt.getKeyChar();
-        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == '.') || (caracter == KeyEvent.VK_DELETE)))) {
+        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == KeyEvent.VK_DELETE)))) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCapacidadAKeyTyped
 
     private void txtCapacidadBKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadBKeyTyped
         char caracter = evt.getKeyChar();
-        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == '.') || (caracter == KeyEvent.VK_DELETE)))) {
+        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == KeyEvent.VK_DELETE)))) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCapacidadBKeyTyped
@@ -593,7 +593,7 @@ public class Administracion extends javax.swing.JInternalFrame {
 
     private void txtDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDNIKeyTyped
         char caracter = evt.getKeyChar();
-        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == '.') || (caracter == KeyEvent.VK_DELETE)))) {
+        if (!(((caracter >= '0') && (caracter <= '9') || (caracter == KeyEvent.VK_DELETE)))) {
             evt.consume();
 
         }

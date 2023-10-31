@@ -39,7 +39,6 @@ public class Menu extends javax.swing.JFrame {
     Administracion adm;
     Productos pr;
     public static String usuario;
-    
 
     /**
      * Creates new form Menu
@@ -260,7 +259,7 @@ public class Menu extends javax.swing.JFrame {
             adm = new Administracion();
             adm.setVisible(true);
             adm.setTitle("Administracion");
-            adm.mnu = this;
+//            adm.mnu = this;
             Escritorio.add(adm);
             flagAdmin = true;
             try {
@@ -275,7 +274,12 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdministracionActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        System.exit(0);
+        dispose();
+        Login l = new Login();
+        l.setVisible(true);
+        l.setLocationRelativeTo(null);
+
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasActionPerformed
@@ -356,7 +360,7 @@ public class Menu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Menu().setVisible(true);
-                
+
             }
         });
     }
@@ -405,13 +409,13 @@ public class Menu extends javax.swing.JFrame {
     public void seguridadUsuario() {
         if ("MESERO".equals(usuario)) {
             btnAdministracion.setEnabled(false);
-            lblUsuario.setText("-"+usuario+"-");
+            lblUsuario.setText("-" + usuario + "-");
         }
         if ("ENCARGADO".equals(usuario)) {
             //btnMesas.setEnabled(false);
             //btnMesas.setVisible(false);
             lblUsuario.setText("-ADMIN-");
-            lblUsuario.setLocation(SwingConstants.CENTER,SwingConstants.CENTER);
+            lblUsuario.setLocation(SwingConstants.CENTER, SwingConstants.CENTER);
         }
 
     }

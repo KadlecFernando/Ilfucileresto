@@ -635,10 +635,12 @@ public class Pedidos extends javax.swing.JInternalFrame {
         if (modeloDetallePedido.getRowCount() >= 0) {
             cargarTablaDetallePedidos();
             String pago = (String) modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 3);
-            if (pago.equals("Pago")) {
+            if (pago.equals("Pago") || pago.equals("Cancelado")) {
                 btnPago.setEnabled(false);
+                btnModificar.setEnabled(false);
             } else if (pago.equals("Sin pagar")) {
                 btnPago.setEnabled(true);
+                btnModificar.setEnabled(true);
             }
         }
     }//GEN-LAST:event_tablaDetallePedidoMouseClicked
@@ -650,8 +652,8 @@ public class Pedidos extends javax.swing.JInternalFrame {
         }
         Solapas.setSelectedIndex(0);
         lblModo.setText("Modificar Pedido");
-        String num=modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0).toString();
-        lblPedido.setText("N°"+num);
+        String num = modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0).toString();
+        lblPedido.setText("N°" + num);
 
         int e = (Integer) tablaDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
         Pedido p = peD.buscarPedido(e);
@@ -747,10 +749,18 @@ public class Pedidos extends javax.swing.JInternalFrame {
                 }
                 pD.modificarProducto(seleccionado);
             }
+            if (lblModo.getText().equals("Modificar Pedido")) {
+                int num = (Integer)modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
+                Pedido pedido = peD.buscarPedido(num);
+                pedido.setEstado(0);
+                peD.modificarPedido(pedido);
+            }
             modeloVacio.setRowCount(0);
             mostrarDatosTablaProductos();
             lblModo.setText("Nuevo Pedido");
             lblPedido.setText("");
+            cargarTablaPedidos();
+            
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -912,7 +922,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         List<Empleado> empleados = eD.listarEmpleados();
         cbo.addItem(null);
         for (Empleado mozo : empleados) {
-            if (mozo.getPuesto().equals("MESERO")) {
+            if (mozo.getPuesto().equals("MESERO") && mozo.isEstado()) {
                 cbo.addItem(mozo);
             }
         }
@@ -929,7 +939,12 @@ public class Pedidos extends javax.swing.JInternalFrame {
             if (d.getPedido().isPago()) {
                 pago = "Pago";
             } else {
-                pago = "Sin pagar";
+                if (d.getPedido().getEstado() == 0) {
+                    pago = "Cancelado";
+                } else {
+                    pago = "Sin pagar";
+                }
+
             }
             String fecha = d.getPedido().getFechaHora().format(formato);
             modeloDetallePedido.addRow(new Object[]{d.getPedido().getIdPedido(), d.getPedido().getMesa().getIdMesa(),

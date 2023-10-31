@@ -109,7 +109,7 @@ public class PedidoData {
                 pedido.setEstado(rs.getInt("estado"));
                 pedido.setPago(rs.getBoolean("pago"));
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el pedido.");
+//                JOptionPane.showMessageDialog(null, "No existe el pedido.");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -137,7 +137,7 @@ public class PedidoData {
 
             exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
+//                JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
             }
         } catch (SQLException ex) {
             if (exito == 0) {
