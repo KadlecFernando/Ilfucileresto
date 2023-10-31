@@ -132,7 +132,7 @@ public class DetallePedidoData {
             ps.setInt(1, pedido.getIdPedido());
             int fila = ps.executeUpdate();
             if (fila > 0) {
-                JOptionPane.showMessageDialog(null, "Detalle Eliminado.");
+//                JOptionPane.showMessageDialog(null, "Detalle Eliminado.");
             }
             ps.close();
         } catch (SQLException ex) {
