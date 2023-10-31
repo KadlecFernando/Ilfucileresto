@@ -107,6 +107,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         btnAgregar = new javax.swing.JButton();
         btnDescartar = new javax.swing.JButton();
         lblModo = new javax.swing.JLabel();
+        lblPedido = new javax.swing.JLabel();
         pnVerPedido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -307,18 +308,20 @@ public class Pedidos extends javax.swing.JInternalFrame {
         lblModo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblModo.setText("Nuevo Pedido");
 
+        lblPedido.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
         javax.swing.GroupLayout pnAgregarPedidoLayout = new javax.swing.GroupLayout(pnAgregarPedido);
         pnAgregarPedido.setLayout(pnAgregarPedidoLayout);
         pnAgregarPedidoLayout.setHorizontalGroup(
             pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
-                .addContainerGap(531, Short.MAX_VALUE)
-                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarPedidoLayout.createSequentialGroup()
-                        .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDescartar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(62, 62, 62)
+                .addContainerGap(535, Short.MAX_VALUE)
+                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDescartar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(62, 62, 62)
+                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
                         .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
@@ -335,9 +338,11 @@ public class Pedidos extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(cboMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(62, 62, 62))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarPedidoLayout.createSequentialGroup()
+                    .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
                         .addComponent(lblModo)
-                        .addGap(194, 194, 194))))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(147, 147, 147))))
             .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnAgregarPedidoLayout.createSequentialGroup()
                     .addGap(30, 30, 30)
@@ -348,7 +353,9 @@ public class Pedidos extends javax.swing.JInternalFrame {
             pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarPedidoLayout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(lblModo)
+                .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblModo)
+                    .addComponent(lblPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnAgregarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -625,13 +632,14 @@ public class Pedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboMozosItemStateChanged
 
     private void tablaDetallePedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDetallePedidoMouseClicked
-
-        cargarTablaDetallePedidos();
-        String pago = (String)modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(),3);
-        if (pago.equals("Pago")){
-           btnPago.setEnabled(false);
-        }else if(pago.equals("Sin pagar")){
-            btnPago.setEnabled(true);
+        if (modeloDetallePedido.getRowCount() >= 0) {
+            cargarTablaDetallePedidos();
+            String pago = (String) modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 3);
+            if (pago.equals("Pago")) {
+                btnPago.setEnabled(false);
+            } else if (pago.equals("Sin pagar")) {
+                btnPago.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_tablaDetallePedidoMouseClicked
 
@@ -642,6 +650,8 @@ public class Pedidos extends javax.swing.JInternalFrame {
         }
         Solapas.setSelectedIndex(0);
         lblModo.setText("Modificar Pedido");
+        String num=modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0).toString();
+        lblPedido.setText("N°"+num);
 
         int e = (Integer) tablaDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
         Pedido p = peD.buscarPedido(e);
@@ -740,6 +750,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
             modeloVacio.setRowCount(0);
             mostrarDatosTablaProductos();
             lblModo.setText("Nuevo Pedido");
+            lblPedido.setText("");
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -748,22 +759,27 @@ public class Pedidos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe completar todos los datos.");
             return;
         }
-        Pedido p = new Pedido();
+        Pedido pedido;
+        if (lblModo.getText().equals("Modificar Pedido")) {
+            int id = (Integer) tablaDetalle.getValueAt(0, 0);
+            pedido = peD.buscarPedido(id);
+        } else {
+            pedido = new Pedido();
+        }
         DetallePedido dp = new DetallePedido();
         Empleado e = (Empleado) cboMozo.getSelectedItem();
         Mesa m = (Mesa) cboMesas.getSelectedItem();
-        p.setEmpleado(e);
-        p.setMesa(m);
-        p.setFechaHora(LocalDateTime.now());
-        p.setPago(false);
-        p.setEstado(1);
-        dp.setPedido(p);
+        pedido.setEmpleado(e);
+        pedido.setMesa(m);
+        pedido.setFechaHora(LocalDateTime.now());
+        pedido.setPago(false);
+        pedido.setEstado(1);
+        dp.setPedido(pedido);
         if (lblModo.getText().equals("Modificar Pedido")) {
-            peD.modificarPedido(p);
+            dpD.eliminarDetallePedido(pedido);
         } else {
-            peD.guardarPedido(p);
+            peD.guardarPedido(pedido);
         }
-
         Map<Integer, Integer> conteoProductos = new HashMap<>();
         for (int fila = 0; fila < modeloVacio.getRowCount(); fila++) {
             Integer producto = (Integer) modeloVacio.getValueAt(fila, 0);
@@ -773,19 +789,17 @@ public class Pedidos extends javax.swing.JInternalFrame {
             int key = Integer.valueOf(entry.getKey());
             Producto pro = pD.buscarProducto(key);
             Integer value = entry.getValue();
-            if (lblModo.getText().equals("Modificar Pedido")) {
-                dpD.actualizarDetallePedido(p, pro, value);
-            } else {
-                dpD.agregarDetallePedido(p, pro, value);
-            }
+            dpD.agregarDetallePedido(pedido, pro, value);
         }
-        double total = dpD.calcularTotal(p);
-        p.setImporte(total);
-        peD.modificarPedido(p);
+        double total = dpD.calcularTotal(pedido);
+        pedido.setImporte(total);
+        peD.modificarPedido(pedido);
         cboMesas.setSelectedIndex(0);
         cboMozo.setSelectedIndex(0);
         modeloVacio.setRowCount(0);
         lblModo.setText("Nuevo Pedido");
+        lblPedido.setText("");
+        cargarTablaDetallePedidos();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void cboMesasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cboMesasPropertyChange
@@ -968,6 +982,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jtTotal;
     private javax.swing.JLabel lblModo;
+    private javax.swing.JLabel lblPedido;
     private javax.swing.JPanel pnAgregarPedido;
     private javax.swing.JPanel pnVerPedido;
     private javax.swing.JTable tablaDetalle;

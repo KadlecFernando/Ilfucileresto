@@ -124,16 +124,15 @@ public class DetallePedidoData {
         return detallesPedidos;
     }
 
-    public void eliminarDetallePedido(Pedido pedido, Producto producto) {
-        String sql = "DELETE FROM detallePedido WHERE idPedido=? AND idProducto=?";
+    public void eliminarDetallePedido(Pedido pedido) {
+        String sql = "DELETE FROM detallePedido WHERE idPedido=?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, pedido.getIdPedido());
-            ps.setInt(2, producto.getIdProducto());
             int fila = ps.executeUpdate();
             if (fila > 0) {
-                JOptionPane.showMessageDialog(null, "Producto eliminado del pedido.");
+                JOptionPane.showMessageDialog(null, "Detalle Eliminado.");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -142,16 +141,16 @@ public class DetallePedidoData {
     }
 
     public void actualizarDetallePedido(Pedido pedido, Producto producto, int cantidad) {
-        String sql = "UPDATE detallePedido SET cantidad=? WHERE idPedido=? AND idProducto=?";
+        String sql = "UPDATE detallePedido SET cantidad=?,idProducto=? WHERE idPedido=?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, cantidad);
-            ps.setInt(2, pedido.getIdPedido());
-            ps.setInt(3, producto.getIdProducto());
+            ps.setInt(2, producto.getIdProducto());
+            ps.setInt(3, pedido.getIdPedido());
             int fila = ps.executeUpdate();
             if (fila > 0) {
-                JOptionPane.showMessageDialog(null, "Producto eliminado del pedido.");
+                JOptionPane.showMessageDialog(null, "Detalle actualizado.");
             }
             ps.close();
         } catch (SQLException ex) {
