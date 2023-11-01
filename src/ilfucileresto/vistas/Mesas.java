@@ -137,7 +137,7 @@ public class Mesas extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
     public void mostrarMesas() {
 
-        ImageIcon icono = new ImageIcon(getClass().getResource("/ilfucileresto/imagenes/comedor.png"));
+        ImageIcon icono = new ImageIcon("C:/Users/Loa/Pictures/Loaloa.Soft/Curso App JAVA ULP/Repositorios GitHub/UniversidadULPGrupo61/Ilfucileresto/src/ilfucileresto/Imagenes/comedor.png");
         int contador = 0;
         int altoPlus = pnMesas.getHeight();
 

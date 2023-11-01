@@ -1,6 +1,7 @@
-package ilfucileresto.vistas;
+package ilfucileresto;
 // El Sebas: El rockanroll no morirá jamás ♡♡♡♡♡♡ 
 
+import ilfucileresto.vistas.Login;
 import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.ImageIcon;

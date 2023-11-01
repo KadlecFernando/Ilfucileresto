@@ -859,16 +859,19 @@ public class Pedidos extends javax.swing.JInternalFrame {
             int idPedido = (Integer) modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
             Pedido pedido = peD.buscarPedido(idPedido);
             Mesa mesa = pedido.getMesa();
-            List<Pedido> pedidos = peD.buscarPedidoAbiertoPorMesa(mesa);
-
+            
             pedido.setPago(true);
             peD.modificarPedido(pedido);
+            
+            List<Pedido> pedidos = peD.buscarPedidoAbiertoPorMesa(mesa);
+            
 
             if (pedidos.size() < 1) {
                 mesa.setEstadoMesa(0);
                 mD.modificarMesa(mesa);
             }
-
+            
+            
             cargarTablaPedidos();
             cargarTablaDetallePedidos();
         }
