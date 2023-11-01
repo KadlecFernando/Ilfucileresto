@@ -1674,12 +1674,14 @@ public class Administracion extends javax.swing.JInternalFrame {
                 } else {
                     pago = "Sin pagar";
                 }
-
             }
-            modeloMesas.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(), p.getEmpleado().getNombre() + " " + p.getEmpleado().getApellido(), pago, p.getImporte()});
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            String horario = p.getFechaHora().format(f);
+            modeloMesas.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(),
+                p.getEmpleado().getApellido() + ", " + p.getEmpleado().getNombre(), horario, pago, p.getImporte()});
 
         }
-        lblTotal.setText(total + "");
+        lblTotal1.setText(total + "");
     }
 
     private void cargarColumnasMesas() {
@@ -1689,6 +1691,7 @@ public class Administracion extends javax.swing.JInternalFrame {
         modeloMesas.addColumn("Horario");
         modeloMesas.addColumn("Estado");
         modeloMesas.addColumn("Subtotal");
+        tbInformeMesero1.setModel(modeloMesas);
     }
 
 }
