@@ -138,6 +138,7 @@ public class Mesas extends javax.swing.JInternalFrame {
     public void mostrarMesas() {
 
         ImageIcon icono = new ImageIcon(getClass().getResource("/ilfucileresto/imagenes/comedor.png"));
+//        ImageIcon icono = new ImageIcon("C:/Users/usuario/Documents/NetBeansProjects/RestoIlFucile/Ilfucileresto/build/classes/ilfucileresto/Imagenes/comedor.png");
         int contador = 0;
         int altoPlus = pnMesas.getHeight();
 
