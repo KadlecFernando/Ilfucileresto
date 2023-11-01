@@ -259,7 +259,7 @@ public class Menu extends javax.swing.JFrame {
             adm = new Administracion();
             adm.setVisible(true);
             adm.setTitle("Administracion");
-//            adm.mnu = this;
+            adm.mnu = this;
             Escritorio.add(adm);
             flagAdmin = true;
             try {
