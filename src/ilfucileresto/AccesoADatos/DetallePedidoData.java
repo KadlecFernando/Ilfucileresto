@@ -45,11 +45,11 @@ public class DetallePedidoData {
     public List<DetallePedido> listarDetallePedidosPorEmpleado(int idEmpleado) {
         List<DetallePedido> detallesPedidos = new ArrayList<>();
         try {
-            String sql = "Select detallePedido.* from detallepedido\n"
+            String sql = "SELECT detallePedido.* FROM detallepedido\n"
                     + "JOIN pedido\n"
                     + "ON detallepedido.idPedido=pedido.idPedido\n"
                     + "WHERE pedido.idEmpleado=?\n"
-                    + "order by detallepedido.idPedido desc;";
+                    + "ORDER BY detallepedido.idPedido desc;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idEmpleado);
             ResultSet rs = ps.executeQuery();

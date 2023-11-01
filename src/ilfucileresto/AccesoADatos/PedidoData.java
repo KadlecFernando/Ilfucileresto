@@ -85,19 +85,21 @@ public class PedidoData {
         return pedido;
     }
     
-     public Pedido buscarPedidoAbiertoPorMesa(Mesa mesa) {
+     public List<Pedido> buscarPedidoAbiertoPorMesa(Mesa mesa) {
 
         Pedido pedido = null;
-        String sql = "SELECT idPedido,idEmpleado,fechaHora,importe,estado,pago FROM pedido WHERE idMesa = ? AND pago=0";
+        String sql = "SELECT idPedido,idEmpleado,fechaHora,importe,estado,pago FROM pedido WHERE idMesa = ? AND pago=0 AND estado=1";
 
         PreparedStatement ps = null;
+        List <Pedido> pedidos = new ArrayList<>();
+        
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, mesa.getIdMesa());
 
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 pedido = new Pedido();
                 pedido.setIdPedido(rs.getInt("idPedido"));
                 Empleado empleado = empleadoData.buscarEmpleado(rs.getInt("idEmpleado"));
@@ -108,15 +110,16 @@ public class PedidoData {
                 pedido.setImporte(rs.getDouble("importe"));
                 pedido.setEstado(rs.getInt("estado"));
                 pedido.setPago(rs.getBoolean("pago"));
-            } else {
-//                JOptionPane.showMessageDialog(null, "No existe el pedido.");
+                pedidos.add(pedido);
             }
+//                JOptionPane.showMessageDialog(null, "No existe el pedido.");
+
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido " + ex.getMessage());
         }
 
-        return pedido;
+        return pedidos;
     }
 
     public void modificarPedido(Pedido pedido) {
@@ -160,7 +163,7 @@ public class PedidoData {
                 pedidos.add(pedido);
             }
             ps.close();
-        } catch (SQLException ex) {
+        } catch (SQLException | NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido." + ex.getMessage());
         }
         return pedidos;
@@ -217,7 +220,7 @@ public class PedidoData {
         List<Pedido> pedidos = new ArrayList<>();
 
         try {
-            String sql = "Select idPedido from pedido Where idMesa=? AND Date(fechaHora)=? AND Time(fechaHora) Between Time(?) AND time(?)";
+            String sql = "SELECT idPedido FROM pedido WHERE idMesa=? AND Date(fechaHora)=? AND Time(fechaHora) BETWEEN Time(?) AND Time(?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, mesa.getIdMesa());
             ps.setDate(2, java.sql.Date.valueOf(dia));
@@ -234,6 +237,28 @@ public class PedidoData {
         }
         return pedidos;
     }
+    
+    public List<Pedido> listarPedidosPorHora(LocalDate dia, LocalTime horaDesde, LocalTime horaHasta) {
+        List<Pedido> pedidos = new ArrayList<>();
+
+        try {
+            String sql = "SELECT idPedido FROM pedido WHERE Date(fechaHora)=? AND Time(fechaHora) BETWEEN Time(?) AND Time(?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, java.sql.Date.valueOf(dia));
+            ps.setTime(2, java.sql.Time.valueOf(horaDesde));
+            ps.setTime(3, java.sql.Time.valueOf(horaHasta));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pedido pedido = buscarPedido(rs.getInt("idPedido"));
+                pedidos.add(pedido);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido." + ex.getMessage());
+        }
+        return pedidos;
+    }
+
 
     public double calcularIngresosPorFecha(LocalDate fecha) {
         double total = -1;

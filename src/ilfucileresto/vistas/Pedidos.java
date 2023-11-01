@@ -12,6 +12,7 @@ import ilfucileresto.Entidades.Pedido;
 import ilfucileresto.Entidades.Producto;
 import java.awt.Color;
 import java.awt.Component;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -620,9 +621,6 @@ public class Pedidos extends javax.swing.JInternalFrame {
         cboMozos.setSelectedItem(emp);
     }//GEN-LAST:event_cboMozosPopupMenuWillBecomeVisible
 
-    private void SolapasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SolapasMouseClicked
-    }//GEN-LAST:event_SolapasMouseClicked
-
     private void cboMozosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboMozosItemStateChanged
         if (cboMozos.getSelectedItem() != null) {
             cargarTablaPedidos();
@@ -750,17 +748,24 @@ public class Pedidos extends javax.swing.JInternalFrame {
                 pD.modificarProducto(seleccionado);
             }
             if (lblModo.getText().equals("Modificar Pedido")) {
-                int num = (Integer)modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
+                int num = (Integer) modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
                 Pedido pedido = peD.buscarPedido(num);
                 pedido.setEstado(0);
                 peD.modificarPedido(pedido);
+                Mesa mesa = mD.buscarMesa(pedido.getMesa().getIdMesa());
+                List<Pedido> pedidos = peD.buscarPedidoAbiertoPorMesa(mesa);
+
+                if (pedidos.size() < 1) {
+                    mesa.setEstadoMesa(0);
+                    mD.modificarMesa(mesa);
+                }
             }
             modeloVacio.setRowCount(0);
             mostrarDatosTablaProductos();
             lblModo.setText("Nuevo Pedido");
             lblPedido.setText("");
             cargarTablaPedidos();
-            
+
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -809,7 +814,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         modeloVacio.setRowCount(0);
         lblModo.setText("Nuevo Pedido");
         lblPedido.setText("");
-        cargarTablaDetallePedidos();
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void cboMesasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cboMesasPropertyChange
@@ -854,16 +859,28 @@ public class Pedidos extends javax.swing.JInternalFrame {
             int idPedido = (Integer) modeloDetallePedido.getValueAt(tablaDetallePedido.getSelectedRow(), 0);
             Pedido pedido = peD.buscarPedido(idPedido);
             Mesa mesa = pedido.getMesa();
-            mesa.setEstadoMesa(0);
+            List<Pedido> pedidos = peD.buscarPedidoAbiertoPorMesa(mesa);
+
             pedido.setPago(true);
-            mD.modificarMesa(mesa);
             peD.modificarPedido(pedido);
+
+            if (pedidos.size() < 1) {
+                mesa.setEstadoMesa(0);
+                mD.modificarMesa(mesa);
+            }
+
             cargarTablaPedidos();
             cargarTablaDetallePedidos();
         }
 
 
     }//GEN-LAST:event_btnPagoActionPerformed
+
+    private void SolapasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SolapasMouseClicked
+
+        cargarTablaPedidos();
+        cargarTablaDetallePedidos();
+    }//GEN-LAST:event_SolapasMouseClicked
 
     public void cargarColumnasProductos() {
         modelo.addColumn("Codigo");
@@ -930,24 +947,28 @@ public class Pedidos extends javax.swing.JInternalFrame {
     }
 
     public void cargarTablaPedidos() {
+        if (cboMozos.getSelectedItem() == null) {
+            return;
+        }
         Empleado e = (Empleado) cboMozos.getSelectedItem();
-        List<DetallePedido> detalles = dpD.listarDetallePedidosPorEmpleadoPreciosHora(e.getIdEmpleado());
+        List<Pedido> detalles = peD.listarPedidosPorMesero(e, LocalDate.now());
+        //List<DetallePedido> detalles = dpD.listarDetallePedidosPorEmpleadoPreciosHora(e.getIdEmpleado());
         modeloDetallePedido.setRowCount(0);
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String pago = "";
-        for (DetallePedido d : detalles) {
-            if (d.getPedido().isPago()) {
+        for (Pedido p : detalles) {
+            if (p.isPago()) {
                 pago = "Pago";
             } else {
-                if (d.getPedido().getEstado() == 0) {
+                if (p.getEstado() == 0) {
                     pago = "Cancelado";
                 } else {
                     pago = "Sin pagar";
                 }
 
             }
-            String fecha = d.getPedido().getFechaHora().format(formato);
-            modeloDetallePedido.addRow(new Object[]{d.getPedido().getIdPedido(), d.getPedido().getMesa().getIdMesa(),
+            String fecha = p.getFechaHora().format(formato);
+            modeloDetallePedido.addRow(new Object[]{p.getIdPedido(), p.getMesa().getIdMesa(),
                 fecha, pago});
         }
     }

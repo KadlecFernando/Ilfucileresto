@@ -167,8 +167,8 @@ public class Mesas extends javax.swing.JInternalFrame {
                         mD.modificarMesa(mesa);
                     }else{
                         PedidoData peD = new PedidoData();
-                        Pedido pedido = peD.buscarPedidoAbiertoPorMesa(mesa);
-                        if(pedido!=null){
+                        List<Pedido> pedidos = peD.buscarPedidoAbiertoPorMesa(mesa);
+                        if(!pedidos.isEmpty()){
                             JOptionPane.showMessageDialog(rootPane, "La mesa no puede cambiar su estado a LIBRE por tener pedidos pendientes.");
                             return;
                         }
