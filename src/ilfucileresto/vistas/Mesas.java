@@ -14,7 +14,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -37,6 +36,7 @@ public class Mesas extends javax.swing.JInternalFrame {
     public Mesas() {
         initComponents();
         mostrarMesas();
+        
     }
 
     /**
@@ -137,7 +137,7 @@ public class Mesas extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
     public void mostrarMesas() {
 
-        ImageIcon icono = new ImageIcon(getClass().getResource("/ilfucileresto/imagenes/comedor.png"));
+        ImageIcon icono = new ImageIcon("C:/Users/ferge/Documents/GitHub/Ilfucileresto/src/ilfucileresto/Imagenes/comedor.png");
         int contador = 0;
         int altoPlus = pnMesas.getHeight();
 
